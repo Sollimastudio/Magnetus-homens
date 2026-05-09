@@ -214,14 +214,32 @@ const App = () => {
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
             <img src="/images/ebook%20MAGNETUS%203.jpeg" alt="Manual do Comando" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
-            <h3 className="text-2xl font-bold mb-3">Manual do Comando</h3>
-            <p className="text-gray-500 text-sm">Reestruture o seu eixo biológico e instale a presença que impõe respeito imediato.</p>
+            <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">MAGNETUS III:<br/><span className="text-white text-lg">A Engenharia da Presença</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              O protocolo de 15 dias para instalar soberania biológica. Este manual de engenharia comportamental ensina a regular o sistema nervoso para <strong className="text-white">projectar um valor social inquestionável</strong>. É a ferramenta definitiva para quem deseja deixar de ser um "caçador" e tornar-se o destino final: a Fonte.
+            </p>
           </div>
 
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
              <img src="/images/BONUS%20ANTIDOTO%20ANTIVALOR%20MASCULINO.jpeg" alt="O Antídoto" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
-            <h3 className="text-2xl font-bold mb-3">O Antídoto</h3>
-            <p className="text-gray-500 text-sm">Erradique os comportamentos silenciosos que drenam o seu valor social.</p>
+            <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">ANTIVALOR:<br/><span className="text-white text-lg">O Extermínio da Sabotagem</span></h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              O diagnóstico brutal dos pontos cegos que repelem os teus resultados. Este guia identifica e elimina os <strong className="text-white">vazamentos invisíveis de insegurança</strong> e reatividade que comunicam carência. É o antídoto necessário para remover o "travão de mão" que sabota o teu magnetismo antes de abrires a boca.
+            </p>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-6 mt-8 max-w-5xl">
+          <div className="bg-gradient-to-r from-[#111] via-[#1a1a1a] to-[#111] border border-[#c5a059]/30 p-8 md:p-10 rounded-2xl text-center">
+            <h3 className="text-2xl font-black mb-4 uppercase tracking-widest text-[#c5a059]">O COMBO: <span className="text-white">Sistema Operacional de Alto Valor</span></h3>
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6">
+              A solução completa que une a <strong className="text-[#c5a059]">poda estratégica</strong> à <strong className="text-[#c5a059]">construção de poder</strong>. Enquanto o <em className="italic text-gray-400">Antivalor</em> limpa o terreno e estanca a perda de autoridade, o <em className="italic text-gray-400">Magnetus III</em> edifica a estrutura da presença magnética. É o equilíbrio perfeito entre parar de errar e começar a dominar.
+            </p>
+            <div className="inline-block border-t border-white/10 pt-4">
+              <p className="text-white font-bold tracking-wide uppercase text-sm md:text-base">
+                O resultado? Atração real como consequência biológica, não como esforço.
+              </p>
+            </div>
           </div>
         </div>
       </section>
