@@ -228,24 +228,66 @@ const App = () => {
 
       {/* AUTORA SECTION */}
       <section id="autora" className="py-24 bg-black">
-        <div className="container mx-auto px-6 max-w-4xl text-center md:text-left">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-60 h-60 md:w-72 md:h-72 shrink-0 relative">
+        <div className="container mx-auto px-6 max-w-5xl text-left">
+          <div className="flex flex-col md:flex-row items-start gap-12">
+            <div className="w-60 h-60 md:w-80 md:h-auto md:aspect-[3/4] shrink-0 relative mx-auto md:mx-0 sticky top-24">
                <div className="absolute inset-0 border-2 border-[#c5a059] translate-x-3 translate-y-3 rounded-2xl"></div>
                <div className="absolute inset-0 bg-[#1a1a1a] rounded-2xl overflow-hidden">
                  <img 
-                    src="/images/author_sol_lima.png" 
+                    src="/images/autora%20Sol%20Lima.jpg" 
                     alt="Sol Lima" 
-                    className="w-full h-full object-cover grayscale"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                  />
                </div>
             </div>
-            <div>
+            <div className="w-full md:flex-1">
               <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">A Arquiteta do Método</span>
-              <h2 className="text-4xl font-black mt-2 mb-6 uppercase">Sol <span className="italic">Lima.</span></h2>
-              <p className="text-gray-400 text-lg font-light leading-relaxed">
-                Especialista em comportamento e neurociência. A minha missão é transformar a dor em método e ensinar que antes de abraçar o mundo, precisas de te relacionar contigo mesmo.
-              </p>
+              <h2 className="text-4xl md:text-5xl font-black mt-2 mb-8 uppercase">Sol <span className="italic">Lima.</span></h2>
+              
+              <div className="space-y-5 text-gray-400 text-base md:text-lg font-light leading-relaxed">
+                <p className="font-bold text-white text-xl">Eu sobrevivi ao que chamo de Feminicídio Emocional.</p>
+                <p>Por anos, eu fui a sombra de quem eu deveria ser. Vivi em estado de hipervigilância crônica, onde cada passo meu era calculado para não desagradar, para não ser notada, para não incomodar. Minha voz era um sussurro abafado por uma religiosidade que me ensinou a anular o "eu".</p>
+                <p>Eu não tinha amor-próprio. Minha autoestima era um deserto. Mas a dor me levou ao estudo. Mergulhei na neurociência para entender por que meu cérebro me mantinha refém do medo.</p>
+                
+                <blockquote className="border-l-2 border-[#c5a059] pl-6 my-8 italic text-gray-200 py-2 bg-white/5 rounded-r-lg">
+                  "No meu TCC sobre Presença e Magnetismo, descobri que a atração não é um dom místico, mas um padrão de sinais químicos e comportamentais que qualquer mulher pode ativar."
+                </blockquote>
+                
+                <p>Hoje, como Sol Lima, eu não apenas recuperei minha luz; eu criei o Protocolo Magnetus para que você não precise levar décadas para fazer o mesmo. É a ciência da ressurreição da sua presença.</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6 mt-10 mb-10 border-y border-white/5 py-8">
+                <div className="bg-[#111] p-4 rounded-xl border border-white/5">
+                  <h4 className="text-[#c5a059] font-bold mb-2 uppercase tracking-wider text-sm">Neurociência</h4>
+                  <p className="text-sm text-gray-500">Base científica em cada técnica.</p>
+                </div>
+                <div className="bg-[#111] p-4 rounded-xl border border-white/5">
+                  <h4 className="text-[#c5a059] font-bold mb-2 uppercase tracking-wider text-sm">Blindagem</h4>
+                  <p className="text-sm text-gray-500">Proteção contra a autoanulação.</p>
+                </div>
+              </div>
+
+              <div className="bg-[#1a1a1a] p-8 rounded-2xl border border-[#c5a059]/20 shadow-[0_0_30px_rgba(197,160,89,0.05)]">
+                <h4 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">A Metamorfose em 7 Dias:</h4>
+                <ul className="space-y-4">
+                  {[
+                    "Quebra do estado de hipervigilância",
+                    "Ressignificação da autoimagem neural",
+                    "Domínio da linguagem corporal de alto valor",
+                    "Ativação do 'Efeito Imã' social",
+                    "Comunicação visceral e assertiva",
+                    "Eliminação de bloqueios religiosos limitantes",
+                    "Protocolo de Presença Inabalável"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-base text-gray-300">
+                      <div className="w-6 h-6 rounded-full bg-[#c5a059]/10 flex items-center justify-center shrink-0">
+                        <Zap size={14} className="text-[#c5a059]" />
+                      </div>
+                      <span className="font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
