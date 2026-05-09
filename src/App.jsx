@@ -124,7 +124,7 @@ const App = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0a0a0a] z-10"></div>
           {/* Imagem do Carro - Ajustada para Mobile */}
           <img 
-            src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2070" 
+            src="/images/hero.png" 
             alt="Interior do carro tático" 
             className="w-full h-full object-cover object-center scale-125 md:scale-100 opacity-60"
           />
@@ -213,19 +213,13 @@ const App = () => {
 
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-            <div className="w-40 h-56 bg-[#1a1a1a] rounded shadow-2xl mb-8 flex flex-col justify-center items-center border border-[#c5a059]/30 relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/leather-black.png')] opacity-40"></div>
-              <h4 className="text-[#c5a059] font-black text-lg tracking-widest uppercase relative z-10">MAGNETUS III</h4>
-            </div>
+            <img src="/images/ebook%20MAGNETUS%203.jpeg" alt="Manual do Comando" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
             <h3 className="text-2xl font-bold mb-3">Manual do Comando</h3>
             <p className="text-gray-500 text-sm">Reestruture o seu eixo biológico e instale a presença que impõe respeito imediato.</p>
           </div>
 
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-            <div className="w-40 h-56 bg-[#d4b477]/5 rounded shadow-2xl mb-8 flex flex-col justify-center items-center border border-[#c5a059]/30 relative overflow-hidden">
-               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/old-map.png')] opacity-30"></div>
-               <h4 className="text-[#8b6b2c] font-black text-sm tracking-widest uppercase relative z-10 text-center px-4">ANTÍDOTO DO ANTIVALOR</h4>
-            </div>
+             <img src="/images/BONUS%20ANTIDOTO%20ANTIVALOR%20MASCULINO.jpeg" alt="O Antídoto" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
             <h3 className="text-2xl font-bold mb-3">O Antídoto</h3>
             <p className="text-gray-500 text-sm">Erradique os comportamentos silenciosos que drenam o seu valor social.</p>
           </div>
@@ -240,7 +234,7 @@ const App = () => {
                <div className="absolute inset-0 border-2 border-[#c5a059] translate-x-3 translate-y-3 rounded-2xl"></div>
                <div className="absolute inset-0 bg-[#1a1a1a] rounded-2xl overflow-hidden">
                  <img 
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000" 
+                    src="/images/author_sol_lima.png" 
                     alt="Sol Lima" 
                     className="w-full h-full object-cover grayscale"
                  />
@@ -265,6 +259,8 @@ const App = () => {
             <div className="bg-[#c5a059] text-black px-6 py-1.5 rounded-full font-black text-[10px] uppercase tracking-widest mx-auto inline-block mb-10">
               Oferta válida por tempo limitado
             </div>
+
+            <img src="/images/combo%20magn%20masc.png" alt="Combo Magnetus Masculino" className="w-full max-w-md mx-auto mb-8 rounded-xl shadow-lg" />
 
             <h2 className="text-[80px] md:text-[120px] font-black text-[#c5a059] leading-none mb-2">60%</h2>
             <h3 className="text-2xl md:text-5xl font-bold text-white mb-10 tracking-[0.2em] uppercase">de desconto</h3>
