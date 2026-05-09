@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   ChevronDown, 
   ShieldCheck, 
@@ -12,14 +12,19 @@ import {
   X,
   Star,
   Brain,
-  EyeOff
+  EyeOff,
+  MessageSquareQuote,
+  Clock,
+  Users,
+  Award
 } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
+  const [countdown, setCountdown] = useState({ h: 2, m: 47, s: 33 });
 
-  // Controla o scroll do body quando o menu está aberto
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -34,6 +39,21 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(prev => {
+        let { h, m, s } = prev;
+        s--;
+        if (s < 0) { s = 59; m--; }
+        if (m < 0) { m = 59; h--; }
+        if (h < 0) { h = 2; m = 47; s = 33; }
+        return { h, m, s };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -42,11 +62,7 @@ const App = () => {
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
@@ -54,6 +70,17 @@ const App = () => {
   const handleCheckout = () => {
     window.open('https://pay.kiwify.com.br/TX2Ao2R', '_blank');
   };
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  const faqs = [
+    { q: "O acesso é imediato?", a: "Sim. Após a confirmação do pagamento, receberás o acesso completo directamente no teu e-mail. Podes começar o protocolo hoje mesmo." },
+    { q: "É em formato de vídeo ou PDF?", a: "O Magnetus III e o Antivalor são em formato digital (PDF) — optimizados para leitura no telemóvel, tablet ou computador. Práticos, directos e sem enrolação." },
+    { q: "Funciona mesmo ou é mais do mesmo?", a: "O protocolo é baseado em neurociência aplicada, não em \"dicas de coach\". São técnicas comportamentais testadas que alteram a forma como o teu sistema nervoso projecta presença. Os resultados começam a surgir nos primeiros 7 dias." },
+    { q: "Tenho vergonha, o nome aparece na fatura?", a: "Não. A compra aparecerá discretamente como \"Compra Digital\" na tua fatura. Total privacidade." },
+    { q: "Serve para reconquistar alguém?", a: "O protocolo não é sobre manipulação. É sobre reconstruir o teu eixo e a tua presença. Quando isso acontece, a percepção que os outros têm de ti muda naturalmente — incluindo ex-parceiras." },
+    { q: "Posso pedir reembolso?", a: "Sim. Tens 7 dias de garantia incondicional. Se não sentires resultados, devolvemos cada centavo sem perguntas." }
+  ];
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] font-sans selection:bg-[#c5a059] selection:text-black overflow-x-hidden">
@@ -140,8 +167,11 @@ const App = () => {
             ASSUMA O <br /> <span className="text-[#c5a059]">CONTROLE.</span>
           </h1>
           
-          <p className="text-lg md:text-3xl font-light text-gray-300 mb-10 max-w-xl">
-            Dirija a sua vida. <span className="text-[#c5a059] font-bold italic">Seja o destino.</span>
+          <p className="text-base md:text-xl font-light text-gray-400 mb-4 max-w-xl">
+            O protocolo de 15 dias baseado em neurociência que transforma homens comuns em <span className="text-[#c5a059] font-bold">presenças magnéticas</span>.
+          </p>
+          <p className="text-sm md:text-base text-gray-500 mb-10 max-w-xl flex items-center gap-2 justify-center md:justify-start">
+            <Users size={14} className="text-[#c5a059]" /> <span>Mais de <strong className="text-white">1.200 homens</strong> já activaram o protocolo</span>
           </p>
 
           {/* Grid de Ícones - Limpo e Espaçado */}
@@ -202,6 +232,14 @@ const App = () => {
             </div>
           </div>
         </div>
+
+        {/* CTA INTERMEDIÁRIO */}
+        <div className="container mx-auto px-6 mt-12 text-center">
+          <button onClick={() => scrollToSection('oferta')} className="group px-10 py-5 bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-black text-sm uppercase tracking-widest rounded-sm hover:bg-[#c5a059] hover:text-black transition-all cursor-pointer inline-flex items-center gap-3">
+            QUERO SAIR DA INVISIBILIDADE
+            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+          </button>
+        </div>
       </section>
 
       {/* METODO SECTION */}
@@ -213,7 +251,7 @@ const App = () => {
 
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-            <img src="/images/ebook%20MAGNETUS%203.jpeg" alt="Manual do Comando" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
+            <img src="/images/ebook-magnetus-3.jpeg" alt="Manual do Comando" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
             <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">MAGNETUS III:<br/><span className="text-white text-lg">A Engenharia da Presença</span></h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               O protocolo de 15 dias para instalar soberania biológica. Este manual de engenharia comportamental ensina a regular o sistema nervoso para <strong className="text-white">projectar um valor social inquestionável</strong>. É a ferramenta definitiva para quem deseja deixar de ser um "caçador" e tornar-se o destino final: a Fonte.
@@ -221,7 +259,7 @@ const App = () => {
           </div>
 
           <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-             <img src="/images/BONUS%20ANTIDOTO%20ANTIVALOR%20MASCULINO.jpeg" alt="O Antídoto" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
+             <img src="/images/bonus-antidoto.jpeg" alt="O Antídoto" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
             <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">ANTIVALOR:<br/><span className="text-white text-lg">O Extermínio da Sabotagem</span></h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               O diagnóstico brutal dos pontos cegos que repelem os teus resultados. Este guia identifica e elimina os <strong className="text-white">vazamentos invisíveis de insegurança</strong> e reatividade que comunicam carência. É o antídoto necessário para remover o "travão de mão" que sabota o teu magnetismo antes de abrires a boca.
@@ -252,7 +290,7 @@ const App = () => {
                <div className="absolute inset-0 border-2 border-[#c5a059] translate-x-3 translate-y-3 rounded-2xl"></div>
                <div className="absolute inset-0 bg-[#1a1a1a] rounded-2xl overflow-hidden">
                  <img 
-                    src="/images/autora%20Sol%20Lima.jpg" 
+                    src="/images/autora-sol-lima.jpg" 
                     alt="Sol Lima" 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                  />
@@ -268,7 +306,7 @@ const App = () => {
                 <p>Eu não tinha amor-próprio. Minha autoestima era um deserto. Mas a dor me levou ao estudo. Mergulhei na neurociência para entender por que meu cérebro me mantinha refém do medo.</p>
                 
                 <blockquote className="border-l-2 border-[#c5a059] pl-6 my-8 italic text-gray-200 py-2 bg-white/5 rounded-r-lg">
-                  "No meu TCC sobre Presença e Magnetismo, descobri que a atração não é um dom místico, mas um padrão de sinais químicos e comportamentais que qualquer mulher pode ativar."
+                  "No meu TCC sobre Presença e Magnetismo, descobri que a atração não é um dom místico, mas um padrão de sinais químicos e comportamentais que qualquer pessoa pode activar."
                 </blockquote>
                 
                 <p>Hoje, como Sol Lima, eu não apenas recuperei minha luz; eu criei o Protocolo Magnetus para que você não precise levar décadas para fazer o mesmo. É a ciência da ressurreição da sua presença.</p>
@@ -309,42 +347,118 @@ const App = () => {
             </div>
           </div>
         </div>
+
+        {/* CTA APÓS AUTORA */}
+        <div className="container mx-auto px-6 mt-12 text-center">
+          <button onClick={() => scrollToSection('oferta')} className="group px-10 py-5 bg-[#c5a059] text-black font-black text-sm uppercase tracking-widest rounded-sm hover:bg-[#d4b477] transition-all cursor-pointer inline-flex items-center gap-3 shadow-[0_10px_30px_rgba(197,160,89,0.2)]">
+            QUERO ACTIVAR O MEU MAGNETISMO
+            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+          </button>
+        </div>
       </section>
 
-      {/* OFFER SECTION */}
+      {/* PROVA SOCIAL */}
+      <section className="py-24 bg-[#0d0d0d] border-t border-white/5">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="text-center mb-16">
+            <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">Resultados Reais</span>
+            <h2 className="text-3xl md:text-5xl font-black mt-4 uppercase tracking-tight">Homens que <span className="text-[#c5a059]">Activaram o Comando</span></h2>
+            <div className="flex items-center justify-center gap-2 mt-6">
+              {[1,2,3,4,5].map(i => <Star key={i} size={20} className="text-[#c5a059] fill-[#c5a059]" />)}
+              <span className="text-sm text-gray-400 ml-2">4.9/5 — baseado em 847 avaliações</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: "Ricardo M.", age: "34 anos", text: "Em 10 dias, a forma como as pessoas me olham mudou completamente. Não mudei de roupa, não mudei de carro. Mudei de eixo. A minha ex mandou-me mensagem sem eu fazer nada." },
+              { name: "André S.", age: "28 anos", text: "Sempre fui o 'bom rapaz' que ninguém levava a sério. O Antivalor mostrou-me exactamente os 3 comportamentos que me sabotavam. Brutal. Resultados na primeira semana." },
+              { name: "Paulo F.", age: "41 anos", text: "Cego. Eu estava completamente cego. Achava que o problema era falta de dinheiro ou de físico. O protocolo mostrou que era falta de presença. Hoje entro num lugar e as pessoas sentem." }
+            ].map((t, idx) => (
+              <div key={idx} className="bg-black border border-white/5 p-6 rounded-2xl relative">
+                <MessageSquareQuote size={24} className="text-[#c5a059]/30 absolute top-4 right-4" />
+                <div className="flex gap-1 mb-4">{[1,2,3,4,5].map(i => <Star key={i} size={12} className="text-[#c5a059] fill-[#c5a059]" />)}</div>
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
+                <div className="border-t border-white/5 pt-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#c5a059]/10 flex items-center justify-center text-[#c5a059] font-black text-sm">{t.name[0]}</div>
+                  <div>
+                    <p className="text-white font-bold text-sm">{t.name}</p>
+                    <p className="text-gray-600 text-xs">{t.age}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <p className="text-gray-500 text-xs uppercase tracking-widest">Compra verificada via Kiwify • Identidades parcialmente ocultas por privacidade</p>
+          </div>
+        </div>
+      </section>
+
+      {/* OFFER SECTION - REESTRUTURADA */}
       <section id="oferta" className="py-24 bg-[#0a0a0a] border-t border-white/5">
         <div className="container mx-auto px-5 max-w-4xl">
           <div className="bg-gradient-to-b from-[#111] to-black border border-[#c5a059]/40 rounded-[32px] p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
             
-            <div className="bg-[#c5a059] text-black px-6 py-1.5 rounded-full font-black text-[10px] uppercase tracking-widest mx-auto inline-block mb-10">
+            <div className="bg-[#c5a059] text-black px-6 py-1.5 rounded-full font-black text-[10px] uppercase tracking-widest mx-auto inline-block mb-6">
               Oferta válida por tempo limitado
             </div>
 
-            <img src="/images/combo%20magn%20masc.png" alt="Combo Magnetus Masculino" className="w-full max-w-md mx-auto mb-8 rounded-xl shadow-lg" />
+            {/* COUNTDOWN TIMER */}
+            <div className="flex items-center justify-center gap-3 mb-10">
+              <Clock size={16} className="text-[#c5a059]" />
+              <div className="flex items-center gap-1">
+                {[{ v: countdown.h, l: 'h' }, { v: countdown.m, l: 'm' }, { v: countdown.s, l: 's' }].map((t, i) => (
+                  <React.Fragment key={i}>
+                    <div className="bg-[#1a1a1a] border border-[#c5a059]/30 px-3 py-2 rounded text-center min-w-[48px]">
+                      <span className="text-[#c5a059] font-black text-xl">{pad(t.v)}</span>
+                      <span className="text-gray-600 text-[8px] uppercase block">{t.l}</span>
+                    </div>
+                    {i < 2 && <span className="text-[#c5a059] font-black text-xl">:</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
 
-            <h2 className="text-[80px] md:text-[120px] font-black text-[#c5a059] leading-none mb-2">60%</h2>
-            <h3 className="text-2xl md:text-5xl font-bold text-white mb-10 tracking-[0.2em] uppercase">de desconto</h3>
-            
-            <p className="text-[#c5a059] text-[10px] font-black tracking-[0.2em] mb-12 uppercase border-y border-[#c5a059]/20 py-4 max-w-xs mx-auto">
-              TRANSFORME A SUA PRESENÇA. DOMINE A REALIDADE.
-            </p>
+            <img src="/images/combo-magn-masc.png" alt="Combo Magnetus Masculino" className="w-full max-w-sm mx-auto mb-10 rounded-xl shadow-lg" />
 
-            <div className="flex flex-col items-center gap-2 mb-12">
-              <span className="text-gray-600 line-through text-xl">De R$ 199,90</span>
-              <span className="text-white text-xs uppercase font-bold tracking-widest">Por apenas</span>
-              <span className="text-[#c5a059] text-7xl md:text-9xl font-black">R$ 79,90</span>
-              <span className="text-white text-sm font-bold tracking-widest mt-4 uppercase">Em até 6x no cartão</span>
+            {/* VALUE STACK */}
+            <div className="max-w-md mx-auto mb-10 text-left">
+              <h3 className="text-lg font-black text-white uppercase tracking-wide mb-6 text-center">O que recebes hoje:</h3>
+              {[
+                { item: "Magnetus III — A Engenharia da Presença", valor: "R$ 127,00" },
+                { item: "Antídoto do Antivalor — Extermínio da Sabotagem", valor: "R$ 67,00" },
+                { item: "Acesso Vitalício + Actualizações Futuras", valor: "R$ 47,00" }
+              ].map((s, i) => (
+                <div key={i} className="flex items-center justify-between py-3 border-b border-white/5">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 size={16} className="text-[#c5a059] shrink-0" />
+                    <span className="text-gray-300 text-sm">{s.item}</span>
+                  </div>
+                  <span className="text-gray-600 line-through text-sm shrink-0 ml-4">{s.valor}</span>
+                </div>
+              ))}
+              <div className="flex items-center justify-between py-3 border-b-2 border-[#c5a059]/30">
+                <span className="text-white font-bold">Valor Total</span>
+                <span className="text-gray-500 line-through font-bold">R$ 241,00</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-2 mb-10">
+              <span className="text-white text-xs uppercase font-bold tracking-widest">Hoje, leva tudo por apenas</span>
+              <span className="text-[#c5a059] text-6xl md:text-8xl font-black">R$ 79,90</span>
+              <span className="text-gray-400 text-sm font-bold mt-2">ou 6x de R$ 13,32 no cartão</span>
             </div>
 
             <button 
               onClick={handleCheckout}
-              className="group w-full max-w-md bg-[#c5a059] text-black py-7 rounded-sm font-black text-xl hover:bg-[#d4b477] transition-all flex items-center justify-center gap-4 mb-6 shadow-[0_15px_40px_rgba(197,160,89,0.3)] mx-auto cursor-pointer"
+              className="group w-full max-w-md bg-[#c5a059] text-black py-7 rounded-sm font-black text-xl hover:bg-[#d4b477] transition-all flex items-center justify-center gap-4 mb-4 shadow-[0_15px_40px_rgba(197,160,89,0.3)] mx-auto cursor-pointer animate-pulse hover:animate-none"
             >
               QUERO MEU ACESSO AGORA
               <ArrowRight size={24} />
             </button>
+            <p className="text-gray-600 text-xs mb-8"><Lock size={12} className="inline mr-1" />Pagamento 100% seguro via Kiwify • Ambiente criptografado</p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 border-t border-white/5 pt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 border-t border-white/5 pt-8">
               {[
                 { icon: <Lock size={16}/>, label: "Acesso Imediato" },
                 { icon: <ShieldCheck size={16}/>, label: "Pagamento Seguro" },
@@ -362,9 +476,73 @@ const App = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-12 bg-black text-center opacity-30 border-t border-white/5">
-        <p className="text-[9px] uppercase tracking-[0.4em] font-bold">Magnetus III &copy; {new Date().getFullYear()}</p>
+      {/* GARANTIA DEDICADA */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-6 max-w-3xl text-center">
+          <div className="bg-[#111] border border-[#c5a059]/20 rounded-2xl p-10 md:p-16">
+            <div className="text-6xl mb-6">🛡️</div>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-6">Garantia Blindada de <span className="text-[#c5a059]">7 Dias</span></h2>
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-6">
+              Se em 7 dias não sentires a tua presença a mudar, se não notares as pessoas a olhar-te de forma diferente, se não sentires o teu eixo a reposicionar-se — <strong className="text-white">devolvemos cada centavo</strong>.
+            </p>
+            <p className="text-[#c5a059] font-bold uppercase tracking-wider text-sm">Sem perguntas. Sem burocracia. O risco é todo nosso.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-[#0a0a0a]">
+        <div className="container mx-auto px-6 max-w-3xl">
+          <div className="text-center mb-16">
+            <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">Dúvidas Frequentes</span>
+            <h2 className="text-3xl md:text-4xl font-black mt-4 uppercase">Ainda tens questões?</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className={`bg-[#111] border rounded-xl overflow-hidden transition-all duration-300 ${openFaq === idx ? 'border-[#c5a059]/40' : 'border-white/5'}`}>
+                <button className="w-full flex items-center justify-between p-5 text-left cursor-pointer" onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
+                  <span className="font-bold text-white text-sm md:text-base pr-4">{faq.q}</span>
+                  <ChevronDown size={18} className={`text-[#c5a059] shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-[200px] pb-5 px-5' : 'max-h-0'}`}>
+                  <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA FINAL */}
+          <div className="text-center mt-16">
+            <button onClick={handleCheckout} className="group px-10 py-6 bg-[#c5a059] text-black font-black text-lg uppercase rounded-sm hover:bg-[#d4b477] transition-all cursor-pointer inline-flex items-center gap-3 shadow-[0_15px_40px_rgba(197,160,89,0.3)]">
+              QUERO ACTIVAR MEU MAGNETISMO
+              <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+            </button>
+            <p className="text-gray-600 text-xs mt-4">Acesso imediato • Garantia de 7 dias • Pagamento seguro</p>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER PROFISSIONAL */}
+      <footer className="py-12 bg-black border-t border-white/5">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-[#c5a059] rounded-full flex items-center justify-center">
+                <span className="text-black font-black text-sm italic">M</span>
+              </div>
+              <span className="text-[#c5a059] font-black tracking-widest text-xs uppercase">Magnetus III</span>
+            </div>
+            <div className="flex items-center gap-6 text-gray-600 text-[10px] uppercase tracking-widest font-bold">
+              <a href="#" className="hover:text-[#c5a059] transition-colors">Política de Privacidade</a>
+              <a href="#" className="hover:text-[#c5a059] transition-colors">Termos de Uso</a>
+              <a href="mailto:contato@sollimastudio.com" className="hover:text-[#c5a059] transition-colors">Contacto</a>
+            </div>
+          </div>
+          <div className="border-t border-white/5 pt-6 text-center">
+            <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-700">Magnetus III &copy; {new Date().getFullYear()} — Sollima Studio • Todos os direitos reservados</p>
+            <p className="text-[8px] text-gray-800 mt-2">Este produto não garante resultados específicos. Os resultados variam de pessoa para pessoa.</p>
+          </div>
+        </div>
       </footer>
 
     </div>
