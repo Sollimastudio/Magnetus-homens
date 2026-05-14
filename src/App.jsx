@@ -1,550 +1,598 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { 
-  ChevronDown, 
-  ShieldCheck, 
-  Zap, 
-  Target, 
-  Crown, 
-  CheckCircle2, 
-  Lock, 
+import { useEffect, useState } from 'react';
+import {
   ArrowRight,
-  Menu,
-  X,
-  Star,
   Brain,
+  CheckCircle2,
+  ChevronDown,
+  Crown,
   EyeOff,
+  Lock,
+  Menu,
   MessageSquareQuote,
-  Clock,
-  Users,
-  Award
+  Star,
+  Target,
+  X,
 } from 'lucide-react';
+
+const navItems = [
+  { label: 'O conflito', id: 'problema' },
+  { label: 'Valor', id: 'valor' },
+  { label: 'Protocolo', id: 'metodo' },
+  { label: 'Oferta', id: 'oferta' },
+];
+
+const symptoms = [
+  {
+    icon: <EyeOff size={28} />,
+    title: 'Você se esforça, mas não marca presença',
+    text: 'A conversa acontece, o ambiente se move, e ainda assim sua energia parece não ocupar lugar.',
+  },
+  {
+    icon: <Brain size={28} />,
+    title: 'Você entrega ansiedade sem perceber',
+    text: 'Explica demais, responde rápido demais, pede sinais demais. O corpo entrega antes da frase.',
+  },
+  {
+    icon: <Target size={28} />,
+    title: 'Você confunde intensidade com valor',
+    text: 'Tenta compensar com aparência, performance ou insistência, quando o ponto real é eixo.',
+  },
+];
+
+const valueComparisons = [
+  'Menos que uma visita completa a um bom barbershop.',
+  'Menos que um perfume importado usado para tentar causar impressão.',
+  'Menos que um sapato comprado para parecer mais confiante.',
+  'Menos que um jantar onde você chega com a mesma postura de sempre.',
+];
+
+const fitList = [
+  'Homens que querem parar de procurar aprovação antes de agir.',
+  'Homens que sabem que postura, voz, silêncio e limite também comunicam valor.',
+  'Homens que preferem um plano curto e aplicável a promessas exageradas.',
+  'Homens que querem corrigir sinais de carência, pressa e reatividade.',
+];
+
+const notFitList = [
+  'Quem procura manipulação, script pronto ou promessa de conquista garantida.',
+  'Quem quer resultado sem leitura, prática e auto-observação.',
+  'Quem espera controlar a decisão de outra pessoa.',
+  'Quem precisa de substituto para terapia, acompanhamento médico ou tratamento psicológico.',
+];
+
+const protocolSteps = [
+  {
+    phase: 'Dias 1-5',
+    title: 'Corte do Antivalor',
+    text: 'Você identifica vazamentos de insegurança: pressa, explicação excessiva, postura reativa e necessidade de validação.',
+  },
+  {
+    phase: 'Dias 6-10',
+    title: 'Construção do Eixo',
+    text: 'Você ajusta olhar, ritmo de fala, presença corporal, limites e pequenas decisões que comunicam firmeza.',
+  },
+  {
+    phase: 'Dias 11-15',
+    title: 'Aplicação Social',
+    text: 'Você leva o treino para conversas, encontros, trabalho e situações onde sua presença precisa aparecer sem esforço performático.',
+  },
+];
+
+const receiveStack = [
+  { item: 'Magnetus III: Protocolo de Presença Masculina', value: 'R$ 127,00' },
+  { item: 'Antivalor: mapa dos sinais que reduzem seu valor percebido', value: 'R$ 67,00' },
+  { item: 'Plano prático de aplicação em 15 dias', value: 'R$ 47,00' },
+  { item: 'Acesso vitalício e atualizações do material', value: 'R$ 47,00' },
+];
+
+const testimonials = [
+  {
+    name: 'Ricardo M.',
+    age: '34 anos',
+    text: 'Eu achava que precisava falar mais. O material me mostrou que meu problema era urgência, postura e excesso de explicação.',
+  },
+  {
+    name: 'André S.',
+    age: '28 anos',
+    text: 'O Antivalor bateu em pontos que eu fazia no automático. Em poucos dias comecei a perceber onde eu entregava carência.',
+  },
+  {
+    name: 'Paulo F.',
+    age: '41 anos',
+    text: 'A leitura é direta e aplicável. Não me vendeu fantasia, me deu um roteiro para observar e corrigir comportamento.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'O acesso é imediato?',
+    a: 'Sim. Após a confirmação do pagamento, você recebe o acesso completo no seu e-mail e pode começar o protocolo hoje.',
+  },
+  {
+    q: 'É vídeo ou PDF?',
+    a: 'O Magnetus III e o Antivalor são materiais digitais em PDF, otimizados para celular, tablet e computador.',
+  },
+  {
+    q: 'Funciona mesmo?',
+    a: 'O protocolo organiza práticas de presença, postura, comunicação e autorregulação. Não é promessa mágica: a evolução depende de aplicação consistente.',
+  },
+  {
+    q: 'Serve para reconquistar alguém?',
+    a: 'O protocolo não é sobre manipulação. É sobre reconstruir eixo, postura e presença. Isso pode mudar a forma como você é percebido, mas não controla a escolha de ninguém.',
+  },
+  {
+    q: 'Quanto tempo preciso por dia?',
+    a: 'Reserve de 10 a 20 minutos para leitura, observação e execução dos exercícios. A proposta é simples e diária.',
+  },
+  {
+    q: 'Posso pedir reembolso?',
+    a: 'Sim. Você tem 7 dias de garantia pela plataforma de pagamento. Se o material não fizer sentido para você, solicite o reembolso dentro do prazo.',
+  },
+];
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
-  const [countdown, setCountdown] = useState({ h: 2, m: 47, s: 33 });
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+    return () => {
       document.body.style.overflow = 'unset';
-    }
+    };
   }, [isMenuOpen]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Countdown timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prev => {
-        let { h, m, s } = prev;
-        s--;
-        if (s < 0) { s = 59; m--; }
-        if (m < 0) { m = 59; h--; }
-        if (h < 0) { h = 2; m = 47; s = 33; }
-        return { h, m, s };
-      });
-    }, 1000);
-    return () => clearInterval(timer);
   }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 70;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      const offset = 74;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
 
   const handleCheckout = () => {
-    window.open('https://pay.kiwify.com.br/TX2Ao2R', '_blank');
+    window.open('https://pay.kiwify.com.br/TX2Ao2R', '_blank', 'noopener,noreferrer');
   };
 
-  const pad = (n) => String(n).padStart(2, '0');
-
-  const faqs = [
-    { q: "O acesso é imediato?", a: "Sim. Após a confirmação do pagamento, receberás o acesso completo directamente no teu e-mail. Podes começar o protocolo hoje mesmo." },
-    { q: "É em formato de vídeo ou PDF?", a: "O Magnetus III e o Antivalor são em formato digital (PDF) — optimizados para leitura no telemóvel, tablet ou computador. Práticos, directos e sem enrolação." },
-    { q: "Funciona mesmo ou é mais do mesmo?", a: "O protocolo é baseado em neurociência aplicada, não em \"dicas de coach\". São técnicas comportamentais testadas que alteram a forma como o teu sistema nervoso projecta presença. Os resultados começam a surgir nos primeiros 7 dias." },
-    { q: "Tenho vergonha, o nome aparece na fatura?", a: "Não. A compra aparecerá discretamente como \"Compra Digital\" na tua fatura. Total privacidade." },
-    { q: "Serve para reconquistar alguém?", a: "O protocolo não é sobre manipulação. É sobre reconstruir o teu eixo e a tua presença. Quando isso acontece, a percepção que os outros têm de ti muda naturalmente — incluindo ex-parceiras." },
-    { q: "Posso pedir reembolso?", a: "Sim. Tens 7 dias de garantia incondicional. Se não sentires resultados, devolvemos cada centavo sem perguntas." }
-  ];
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] font-sans selection:bg-[#c5a059] selection:text-black overflow-x-hidden">
-      
-      {/* HEADER TÁTICO */}
-      <nav className={`fixed w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-black/95 border-b border-[#c5a059]/30 py-3' : 'bg-transparent py-5'}`}>
-        <div className="container mx-auto px-5 flex justify-between items-center">
-          
-          {/* Logo / Identidade */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[#c5a059] rounded-full flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(197,160,89,0.3)]">
-              <span className="text-black font-black text-base italic">M</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[#c5a059] font-black tracking-[0.1em] text-xs md:text-sm uppercase leading-none">MAGNETUS III</span>
-              <span className="text-[8px] text-gray-500 font-bold tracking-[0.1em] uppercase mt-1">PROTOCOLO DE PRESENÇA</span>
-            </div>
-          </div>
-          
-          {/* Menu Desktop */}
-          <div className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest uppercase">
-            <button onClick={() => scrollToSection('problema')} className="hover:text-[#c5a059] transition-colors cursor-pointer">O Conflito</button>
-            <button onClick={() => scrollToSection('metodo')} className="hover:text-[#c5a059] transition-colors cursor-pointer">O Protocolo</button>
-            <button onClick={() => scrollToSection('autora')} className="hover:text-[#c5a059] transition-colors cursor-pointer">A Autora</button>
-            <button 
-              onClick={() => scrollToSection('oferta')}
-              className="bg-[#c5a059] text-black px-6 py-2 rounded-sm font-black hover:bg-[#d4b477] transition-all cursor-pointer"
-            >
-              ACESSO AGORA
+    <div className="min-h-screen overflow-x-hidden bg-[#090806] pb-24 text-[#eee8dd] selection:bg-[#c5a059] selection:text-[#090806] md:pb-0">
+      <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-[#c5a059] focus:px-4 focus:py-3 focus:text-sm focus:font-black focus:text-[#090806]">
+        Pular para o conteúdo
+      </a>
+
+      <nav className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${scrolled ? 'border-b border-[#c5a059]/25 bg-[#090806]/95 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.38)] backdrop-blur-xl' : 'bg-transparent py-5'}`}>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8">
+          <button type="button" onClick={() => scrollToSection('conteudo')} className="flex items-center gap-3 text-left">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c5a059] text-lg font-black italic text-[#090806] shadow-[0_0_24px_rgba(197,160,89,0.32)]">M</span>
+            <span className="flex flex-col">
+              <span className="text-xs font-black uppercase tracking-[0.18em] text-[#c5a059]">Magnetus III</span>
+              <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#9b9488]">Presença masculina</span>
+            </span>
+          </button>
+
+          <div className="hidden items-center gap-7 md:flex">
+            {navItems.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToSection(item.id)} className="text-[11px] font-black uppercase tracking-[0.18em] text-[#d8d0c1] transition-colors hover:text-[#c5a059]">
+                {item.label}
+              </button>
+            ))}
+            <button type="button" onClick={() => scrollToSection('oferta')} className="rounded-sm bg-[#c5a059] px-6 py-3 text-[11px] font-black uppercase tracking-[0.12em] text-[#090806] transition-all hover:bg-[#d8b86d] active:translate-y-px">
+              Acesso agora
             </button>
           </div>
 
-          {/* Botão Menu Mobile */}
-          <button 
-            className="md:hidden text-[#c5a059] p-2 relative z-[110] cursor-pointer" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <button type="button" aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'} className="p-2 text-[#c5a059] md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={30} /> : <Menu size={30} />}
           </button>
         </div>
 
-        {/* MENU MOBILE OVERLAY - SOLUÇÃO DEFINITIVA */}
-        <div className={`fixed inset-0 bg-black z-[105] flex flex-col items-center justify-center gap-10 text-center transition-all duration-500 md:hidden ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
-          <div className="absolute top-10 left-10 opacity-20 pointer-events-none">
-            <span className="text-[120px] font-black text-[#c5a059] leading-none">M</span>
+        <div className={`fixed inset-0 z-[105] flex flex-col justify-center bg-[#090806] px-7 transition-all duration-500 md:hidden ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'}`}>
+          <div className="absolute left-8 top-24 text-[120px] font-black leading-none text-[#c5a059]/10">M</div>
+          <div className="relative flex flex-col gap-6">
+            {navItems.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToSection(item.id)} className="text-left text-3xl font-black uppercase tracking-tight text-[#f2eadc]">
+                {item.label}
+              </button>
+            ))}
+            <button type="button" onClick={() => scrollToSection('oferta')} className="mt-5 rounded-sm bg-[#c5a059] px-6 py-5 text-base font-black uppercase tracking-[0.12em] text-[#090806]">
+              Quero meu acesso
+            </button>
           </div>
-          
-          <button onClick={() => scrollToSection('problema')} className="text-3xl font-black tracking-[0.1em] uppercase text-white hover:text-[#c5a059] transition-colors cursor-pointer">O CONFLITO</button>
-          <button onClick={() => scrollToSection('metodo')} className="text-3xl font-black tracking-[0.1em] uppercase text-white hover:text-[#c5a059] transition-colors cursor-pointer">O PROTOCOLO</button>
-          <button onClick={() => scrollToSection('autora')} className="text-3xl font-black tracking-[0.1em] uppercase text-white hover:text-[#c5a059] transition-colors cursor-pointer">A AUTORA</button>
-          
-          <div className="w-12 h-1 bg-[#c5a059]/30 my-2"></div>
-          
-          <button 
-            onClick={() => scrollToSection('oferta')}
-            className="bg-[#c5a059] text-black w-[80%] py-5 rounded-sm font-black text-xl shadow-[0_10px_30px_rgba(197,160,89,0.3)] cursor-pointer"
-          >
-            QUERO MEU ACESSO
-          </button>
-          
-          <p className="text-[10px] text-gray-600 uppercase tracking-widest absolute bottom-10">Instale seu novo eixo biológico.</p>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-[90vh] md:h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0a0a0a] z-10"></div>
-          {/* Imagem do Carro - Ajustada para Mobile */}
-          <img 
-            src="/images/hero.png" 
-            alt="Interior do carro tático" 
-            className="w-full h-full object-cover object-center scale-125 md:scale-100 opacity-60"
-          />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-20 text-center md:text-left pt-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#c5a059]/40 rounded-full bg-black/60 backdrop-blur-md mb-8">
-            <span className="w-1.5 h-1.5 bg-[#c5a059] rounded-full animate-pulse"></span>
-            <span className="text-[#c5a059] text-[9px] font-black tracking-[0.2em] uppercase">Comando Ativado</span>
+      <main id="conteudo">
+        <section className="relative min-h-[100dvh] overflow-hidden">
+          <div className="absolute inset-0">
+            <img src="/images/hero.png" alt="Homem em atmosfera noturna sofisticada" className="h-full w-full scale-105 object-cover object-[60%_center] opacity-60" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(197,160,89,0.22),transparent_28%),linear-gradient(90deg,#090806_0%,rgba(9,8,6,0.92)_35%,rgba(9,8,6,0.45)_72%,rgba(9,8,6,0.72)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#090806] to-transparent" />
           </div>
-          
-          <h1 className="text-[40px] md:text-8xl font-black mb-6 leading-[1] tracking-tighter">
-            ASSUMA O <br /> <span className="text-[#c5a059]">CONTROLE.</span>
-          </h1>
-          
-          <p className="text-base md:text-xl font-light text-gray-400 mb-4 max-w-xl">
-            O protocolo de 15 dias baseado em neurociência que transforma homens comuns em <span className="text-[#c5a059] font-bold">presenças magnéticas</span>.
-          </p>
-          <p className="text-sm md:text-base text-gray-500 mb-10 max-w-xl flex items-center gap-2 justify-center md:justify-start">
-            <Users size={14} className="text-[#c5a059]" /> <span>Mais de <strong className="text-white">1.200 homens</strong> já activaram o protocolo</span>
-          </p>
 
-          {/* Grid de Ícones - Limpo e Espaçado */}
-          <div className="grid grid-cols-2 gap-3 md:gap-8 mb-12 w-full max-w-2xl mx-auto md:mx-0">
-            {[
-              { icon: <Crown size={18} />, label: "Presença Magnética" },
-              { icon: <Target size={18} />, label: "Atração Natural" },
-              { icon: <Zap size={18} />, label: "Mentalidade de Elite" },
-              { icon: <ShieldCheck size={18} />, label: "Comando Inabalável" }
-            ].map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center md:items-start gap-2 p-4 bg-white/[0.03] border border-white/10 rounded-xl backdrop-blur-sm">
-                <div className="text-[#c5a059]">{item.icon}</div>
-                <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.05em] text-gray-400 leading-tight">{item.label}</span>
+          <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-10 px-5 pb-16 pt-28 md:grid-cols-[1.08fr_0.92fr] md:px-8 md:pt-32">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#c5a059]/35 bg-[#090806]/70 px-4 py-2 backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#c5a059]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[#c5a059]">Protocolo completo + bônus secreto</span>
               </div>
-            ))}
-          </div>
-
-          <button 
-            onClick={() => scrollToSection('oferta')}
-            className="group relative w-full md:w-auto px-10 py-6 bg-[#c5a059] text-black font-black text-lg rounded-sm hover:bg-[#d4b477] transition-all flex items-center justify-center gap-3 shadow-[0_15px_40px_rgba(197,160,89,0.3)] cursor-pointer"
-          >
-            QUERO O MEU ACESSO AGORA
-            <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-          </button>
-        </div>
-      </section>
-
-      {/* PROBLEM SECTION */}
-      <section id="problema" className="py-24 bg-[#0a0a0a] relative">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            <span className="text-[#c5a059] font-bold tracking-[0.2em] uppercase text-[10px]">O Conflito Interno</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-4 mb-10 leading-tight">Você domina o território, mas quem domina o seu código?</h2>
-            
-            <div className="space-y-6 text-base md:text-xl text-gray-400 leading-relaxed font-light">
-              <p className="border-l-2 border-[#c5a059] pl-5 italic text-gray-200">
-                "O mundo ensinou-te a construir património. A gerir o gado, a terra, as máquinas. Mas no meio da estrada, instalou em ti um software obsoleto."
+              <h1 className="max-w-4xl text-[43px] font-black uppercase leading-[0.93] tracking-tight text-[#f4ead8] md:text-7xl xl:text-[88px]">
+                Pare de tentar impressionar. <span className="text-[#c5a059]">Construa presença.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#cfc7b8] md:text-xl">
+                Um protocolo digital de 15 dias para corrigir sinais de insegurança, fortalecer postura e comunicar valor sem jogos rasos, sem humilhação e sem depender de validação externa.
               </p>
-              <p>
-                És o gigante que performa força, mas sangra autoridade. Sentes o peso da chave no bolso, mas não sentes o peso da tua presença.
-              </p>
-              <p className="text-[#c5a059] font-bold">
-                O Magnetus III não é sobre o que tens. É sobre quem voltaste a ser.
-              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <button type="button" onClick={() => scrollToSection('oferta')} className="group flex w-full items-center justify-center gap-3 rounded-sm bg-[#c5a059] px-8 py-5 text-base font-black uppercase tracking-wide text-[#090806] shadow-[0_18px_46px_rgba(197,160,89,0.28)] transition-all hover:bg-[#d8b86d] active:translate-y-px sm:w-auto">
+                  Começar hoje por R$ 79,90
+                  <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+                </button>
+                <button type="button" onClick={() => scrollToSection('valor')} className="flex w-full items-center justify-center rounded-sm border border-[#c5a059]/45 px-8 py-5 text-sm font-black uppercase tracking-wide text-[#c5a059] transition-colors hover:bg-[#c5a059]/10 sm:w-auto">
+                  Ver o que está incluso
+                </button>
+              </div>
+              <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
+                {['Acesso imediato', 'PDF prático', 'Bônus Antivalor', 'Garantia 7 dias'].map((item) => (
+                  <div key={item} className="border border-white/10 bg-white/[0.035] p-4 backdrop-blur-sm">
+                    <CheckCircle2 size={16} className="mb-3 text-[#c5a059]" />
+                    <p className="text-[10px] font-black uppercase leading-tight tracking-[0.12em] text-[#d8d0c1]">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-[#121212] p-8 border border-white/5 rounded-2xl">
-                <EyeOff className="text-[#c5a059] mb-4" size={32} />
-                <h3 className="text-xl font-bold mb-2">Invisibilidade</h3>
-                <p className="text-gray-500 text-sm">Passas despercebido nos lugares onde deverias ser o centro gravitacional.</p>
-              </div>
-              <div className="bg-[#121212] p-8 border border-white/5 rounded-2xl">
-                <Brain className="text-[#c5a059] mb-4" size={32} />
-                <h3 className="text-xl font-bold mb-2">Declínio de Eixo</h3>
-                <p className="text-gray-500 text-sm">Tentas usar táticas rasas enquanto a tua biologia implora por um comando real.</p>
+
+            <div className="relative mx-auto w-full max-w-lg">
+              <div className="absolute -inset-8 rounded-full bg-[#c5a059]/15 blur-3xl" />
+              <img src="/images/combo-magnetus-masculino-original.jpeg" alt="Combo completo Magnetus III e Antivalor" className="relative w-full rounded-2xl border border-[#c5a059]/25 shadow-[0_26px_90px_rgba(0,0,0,0.55)]" />
+              <div className="absolute -bottom-5 left-5 right-5 border border-[#c5a059]/30 bg-[#090806]/88 p-4 backdrop-blur-md">
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#c5a059]">Dois materiais. Um objetivo.</p>
+                <p className="mt-1 text-sm font-bold text-[#f4ead8]">Sua melhor versão com mais eixo, presença e autocontrole.</p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* CTA INTERMEDIÁRIO */}
-        <div className="container mx-auto px-6 mt-12 text-center">
-          <button onClick={() => scrollToSection('oferta')} className="group px-10 py-5 bg-transparent border-2 border-[#c5a059] text-[#c5a059] font-black text-sm uppercase tracking-widest rounded-sm hover:bg-[#c5a059] hover:text-black transition-all cursor-pointer inline-flex items-center gap-3">
-            QUERO SAIR DA INVISIBILIDADE
-            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-          </button>
-        </div>
-      </section>
-
-      {/* METODO SECTION */}
-      <section id="metodo" className="py-24 bg-[#0d0d0d]">
-        <div className="container mx-auto px-6 mb-16 text-center">
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">O Protocolo de <span className="text-[#c5a059]">Elite</span></h2>
-          <div className="w-12 h-1 bg-[#c5a059] mx-auto mt-4"></div>
-        </div>
-
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
-          <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-            <img src="/images/ebook-magnetus-3.jpeg" alt="Manual do Comando" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
-            <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">MAGNETUS III:<br/><span className="text-white text-lg">A Engenharia da Presença</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              O protocolo de 15 dias para instalar soberania biológica. Este manual de engenharia comportamental ensina a regular o sistema nervoso para <strong className="text-white">projectar um valor social inquestionável</strong>. É a ferramenta definitiva para quem deseja deixar de ser um "caçador" e tornar-se o destino final: a Fonte.
-            </p>
-          </div>
-
-          <div className="bg-black border border-[#c5a059]/20 p-8 rounded-2xl text-center flex flex-col items-center">
-             <img src="/images/bonus-antidoto.jpeg" alt="O Antídoto" className="w-40 h-56 object-cover rounded shadow-2xl mb-8 border border-[#c5a059]/30" />
-            <h3 className="text-xl font-black mb-3 uppercase tracking-wide text-[#c5a059]">ANTIVALOR:<br/><span className="text-white text-lg">O Extermínio da Sabotagem</span></h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              O diagnóstico brutal dos pontos cegos que repelem os teus resultados. Este guia identifica e elimina os <strong className="text-white">vazamentos invisíveis de insegurança</strong> e reatividade que comunicam carência. É o antídoto necessário para remover o "travão de mão" que sabota o teu magnetismo antes de abrires a boca.
-            </p>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-6 mt-8 max-w-5xl">
-          <div className="bg-gradient-to-r from-[#111] via-[#1a1a1a] to-[#111] border border-[#c5a059]/30 p-8 md:p-10 rounded-2xl text-center">
-            <h3 className="text-2xl font-black mb-4 uppercase tracking-widest text-[#c5a059]">O COMBO: <span className="text-white">Sistema Operacional de Alto Valor</span></h3>
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6">
-              A solução completa que une a <strong className="text-[#c5a059]">poda estratégica</strong> à <strong className="text-[#c5a059]">construção de poder</strong>. Enquanto o <em className="italic text-gray-400">Antivalor</em> limpa o terreno e estanca a perda de autoridade, o <em className="italic text-gray-400">Magnetus III</em> edifica a estrutura da presença magnética. É o equilíbrio perfeito entre parar de errar e começar a dominar.
-            </p>
-            <div className="inline-block border-t border-white/10 pt-4">
-              <p className="text-white font-bold tracking-wide uppercase text-sm md:text-base">
-                O resultado? Atração real como consequência biológica, não como esforço.
+        <section id="problema" className="bg-[#090806] py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">O conflito real</span>
+                <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">
+                  Não é falta de roupa, dinheiro ou frase pronta.
+                </h2>
+              </div>
+              <p className="max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">
+                O problema é quando sua presença comunica pressa, carência, dúvida e necessidade de aprovação. Antes de qualquer palavra, as pessoas já leem sua postura, seu ritmo e seus limites.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* AUTORA SECTION */}
-      <section id="autora" className="py-24 bg-black">
-        <div className="container mx-auto px-6 max-w-5xl text-left">
-          <div className="flex flex-col md:flex-row items-start gap-12">
-            <div className="w-60 h-60 md:w-80 md:h-auto md:aspect-[3/4] shrink-0 relative mx-auto md:mx-0 sticky top-24">
-               <div className="absolute inset-0 border-2 border-[#c5a059] translate-x-3 translate-y-3 rounded-2xl"></div>
-               <div className="absolute inset-0 bg-[#1a1a1a] rounded-2xl overflow-hidden">
-                 <img 
-                    src="/images/autora-sol-lima.jpg" 
-                    alt="Sol Lima" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                 />
-               </div>
+            <div className="mt-14 grid gap-5 md:grid-cols-3">
+              {symptoms.map((item) => (
+                <article key={item.title} className="border border-white/10 bg-[#11100d] p-7">
+                  <div className="mb-6 text-[#c5a059]">{item.icon}</div>
+                  <h3 className="text-xl font-black uppercase leading-tight text-[#f4ead8]">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-[#a9a194]">{item.text}</p>
+                </article>
+              ))}
             </div>
-            <div className="w-full md:flex-1">
-              <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">A Arquiteta do Método</span>
-              <h2 className="text-4xl md:text-5xl font-black mt-2 mb-8 uppercase">Sol <span className="italic">Lima.</span></h2>
-              
-              <div className="space-y-5 text-gray-400 text-base md:text-lg font-light leading-relaxed">
-                <p className="font-bold text-white text-xl">Eu sobrevivi ao que chamo de Feminicídio Emocional.</p>
-                <p>Por anos, eu fui a sombra de quem eu deveria ser. Vivi em estado de hipervigilância crônica, onde cada passo meu era calculado para não desagradar, para não ser notada, para não incomodar. Minha voz era um sussurro abafado por uma religiosidade que me ensinou a anular o "eu".</p>
-                <p>Eu não tinha amor-próprio. Minha autoestima era um deserto. Mas a dor me levou ao estudo. Mergulhei na neurociência para entender por que meu cérebro me mantinha refém do medo.</p>
-                
-                <blockquote className="border-l-2 border-[#c5a059] pl-6 my-8 italic text-gray-200 py-2 bg-white/5 rounded-r-lg">
-                  "No meu TCC sobre Presença e Magnetismo, descobri que a atração não é um dom místico, mas um padrão de sinais químicos e comportamentais que qualquer pessoa pode activar."
-                </blockquote>
-                
-                <p>Hoje, como Sol Lima, eu não apenas recuperei minha luz; eu criei o Protocolo Magnetus para que você não precise levar décadas para fazer o mesmo. É a ciência da ressurreição da sua presença.</p>
-              </div>
+          </div>
+        </section>
 
-              <div className="grid grid-cols-2 gap-6 mt-10 mb-10 border-y border-white/5 py-8">
-                <div className="bg-[#111] p-4 rounded-xl border border-white/5">
-                  <h4 className="text-[#c5a059] font-bold mb-2 uppercase tracking-wider text-sm">Neurociência</h4>
-                  <p className="text-sm text-gray-500">Base científica em cada técnica.</p>
+        <section id="valor" className="bg-[#eee6d7] py-24 text-[#17120b]">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.05fr_0.95fr] md:items-center md:px-8">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#8d6b2c]">Quebra de objeção</span>
+              <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tight md:text-6xl">
+                Custa menos que o que muitos homens compram para parecer confiantes.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#4c4132]">
+                Um barbershop melhora o visual por alguns dias. Um perfume chama atenção por alguns segundos. Um sapato pode compor imagem. O Magnetus trabalha o que sustenta tudo isso: postura, leitura emocional, comunicação e presença.
+              </p>
+              <p className="mt-5 max-w-2xl text-base font-bold leading-relaxed text-[#17120b]">
+                Não substitui uma pós-graduação, terapia ou experiência de vida. Mas corrige uma camada que muitos diplomas caros não ensinam: como você é percebido quando entra, fala, silencia e decide.
+              </p>
+            </div>
+
+            <div className="border border-[#8d6b2c]/25 bg-[#fbf6ea] p-5 shadow-[0_30px_80px_rgba(23,18,11,0.12)] md:p-8">
+              <div className="mb-6 flex items-center justify-between border-b border-[#8d6b2c]/20 pb-5">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8d6b2c]">Investimento</p>
+                  <p className="mt-1 text-4xl font-black text-[#17120b]">R$ 79,90</p>
                 </div>
-                <div className="bg-[#111] p-4 rounded-xl border border-white/5">
-                  <h4 className="text-[#c5a059] font-bold mb-2 uppercase tracking-wider text-sm">Blindagem</h4>
-                  <p className="text-sm text-gray-500">Proteção contra a autoanulação.</p>
-                </div>
+                <Crown size={42} className="text-[#8d6b2c]" />
               </div>
+              <div className="space-y-3">
+                {valueComparisons.map((item) => (
+                  <div key={item} className="flex gap-3 border-b border-[#8d6b2c]/10 pb-3">
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#8d6b2c]" />
+                    <p className="text-sm font-bold leading-relaxed text-[#3d3327]">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <button type="button" onClick={() => scrollToSection('oferta')} className="mt-8 flex w-full items-center justify-center gap-3 bg-[#17120b] px-6 py-5 text-sm font-black uppercase tracking-wide text-[#eee6d7] transition-colors hover:bg-[#2c2114]">
+                Ver oferta completa
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          </div>
+        </section>
 
-              <div className="bg-[#1a1a1a] p-8 rounded-2xl border border-[#c5a059]/20 shadow-[0_0_30px_rgba(197,160,89,0.05)]">
-                <h4 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">A Metamorfose em 7 Dias:</h4>
+        <section className="bg-[#090806] py-24">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[0.95fr_1.05fr] md:items-center md:px-8">
+            <div className="relative overflow-hidden border border-[#c5a059]/20 bg-[#11100d]">
+              <img src="/images/antes-depois-protocolo.png" alt="Antes e depois do protocolo Magnetus" className="h-full min-h-[360px] w-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#090806] to-transparent p-6 pt-24">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Antes e depois</p>
+                <p className="mt-2 max-w-md text-lg font-black uppercase leading-tight text-[#f4ead8]">Da reatividade para o comando de si.</p>
+              </div>
+            </div>
+
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Transformação prática</span>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">
+                Você não muda virando outra pessoa. Muda parando de se abandonar.
+              </h2>
+              <div className="mt-8 grid gap-4">
+                {[
+                  ['Antes do protocolo', 'Impulso, ansiedade, pressa para responder, medo de perder espaço e excesso de explicação.'],
+                  ['Durante o protocolo', 'Observação diária, cortes de antivalor, ajuste de postura, voz, olhar e limites.'],
+                  ['Depois do protocolo', 'Mais eixo, comunicação direta, presença silenciosa e menor dependência de validação externa.'],
+                ].map(([title, text]) => (
+                  <div key={title} className="border border-white/10 bg-white/[0.035] p-6">
+                    <h3 className="text-lg font-black uppercase text-[#c5a059]">{title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#bdb4a5]">{text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-white/5 bg-[#0f0e0b] py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Elegibilidade</span>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">
+                Para quem é. E para quem não é.
+              </h2>
+            </div>
+
+            <div className="mt-14 grid gap-5 md:grid-cols-2">
+              <div className="border border-[#c5a059]/30 bg-[#090806] p-7 md:p-9">
+                <h3 className="mb-7 text-2xl font-black uppercase text-[#c5a059]">É para você se...</h3>
                 <ul className="space-y-4">
-                  {[
-                    "Quebra do estado de hipervigilância",
-                    "Ressignificação da autoimagem neural",
-                    "Domínio da linguagem corporal de alto valor",
-                    "Ativação do 'Efeito Imã' social",
-                    "Comunicação visceral e assertiva",
-                    "Eliminação de bloqueios religiosos limitantes",
-                    "Protocolo de Presença Inabalável"
-                  ].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-base text-gray-300">
-                      <div className="w-6 h-6 rounded-full bg-[#c5a059]/10 flex items-center justify-center shrink-0">
-                        <Zap size={14} className="text-[#c5a059]" />
-                      </div>
-                      <span className="font-medium">{item}</span>
+                  {fitList.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-[#d8d0c1]">
+                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#c5a059]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="border border-white/10 bg-[#090806] p-7 md:p-9">
+                <h3 className="mb-7 text-2xl font-black uppercase text-[#f4ead8]">Não é para você se...</h3>
+                <ul className="space-y-4">
+                  {notFitList.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-[#aaa194]">
+                      <X size={18} className="mt-0.5 shrink-0 text-[#7e7568]" />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* CTA APÓS AUTORA */}
-        <div className="container mx-auto px-6 mt-12 text-center">
-          <button onClick={() => scrollToSection('oferta')} className="group px-10 py-5 bg-[#c5a059] text-black font-black text-sm uppercase tracking-widest rounded-sm hover:bg-[#d4b477] transition-all cursor-pointer inline-flex items-center gap-3 shadow-[0_10px_30px_rgba(197,160,89,0.2)]">
-            QUERO ACTIVAR O MEU MAGNETISMO
-            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-          </button>
-        </div>
-      </section>
-
-      {/* PROVA SOCIAL */}
-      <section className="py-24 bg-[#0d0d0d] border-t border-white/5">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="text-center mb-16">
-            <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">Resultados Reais</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-4 uppercase tracking-tight">Homens que <span className="text-[#c5a059]">Activaram o Comando</span></h2>
-            <div className="flex items-center justify-center gap-2 mt-6">
-              {[1,2,3,4,5].map(i => <Star key={i} size={20} className="text-[#c5a059] fill-[#c5a059]" />)}
-              <span className="text-sm text-gray-400 ml-2">4.9/5 — baseado em 847 avaliações</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: "Ricardo M.", age: "34 anos", text: "Em 10 dias, a forma como as pessoas me olham mudou completamente. Não mudei de roupa, não mudei de carro. Mudei de eixo. A minha ex mandou-me mensagem sem eu fazer nada." },
-              { name: "André S.", age: "28 anos", text: "Sempre fui o 'bom rapaz' que ninguém levava a sério. O Antivalor mostrou-me exactamente os 3 comportamentos que me sabotavam. Brutal. Resultados na primeira semana." },
-              { name: "Paulo F.", age: "41 anos", text: "Cego. Eu estava completamente cego. Achava que o problema era falta de dinheiro ou de físico. O protocolo mostrou que era falta de presença. Hoje entro num lugar e as pessoas sentem." }
-            ].map((t, idx) => (
-              <div key={idx} className="bg-black border border-white/5 p-6 rounded-2xl relative">
-                <MessageSquareQuote size={24} className="text-[#c5a059]/30 absolute top-4 right-4" />
-                <div className="flex gap-1 mb-4">{[1,2,3,4,5].map(i => <Star key={i} size={12} className="text-[#c5a059] fill-[#c5a059]" />)}</div>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
-                <div className="border-t border-white/5 pt-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#c5a059]/10 flex items-center justify-center text-[#c5a059] font-black text-sm">{t.name[0]}</div>
-                  <div>
-                    <p className="text-white font-bold text-sm">{t.name}</p>
-                    <p className="text-gray-600 text-xs">{t.age}</p>
-                  </div>
-                </div>
+        <section id="metodo" className="bg-[#090806] py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="grid gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">O que você recebe</span>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">
+                  Diagnóstico para cortar. Protocolo para construir.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#bdb4a5]">
+                  O combo une o Magnetus III ao Antivalor. Um material mostra o que te enfraquece por dentro, o outro organiza práticas para você reconstruir presença por repetição.
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <p className="text-gray-500 text-xs uppercase tracking-widest">Compra verificada via Kiwify • Identidades parcialmente ocultas por privacidade</p>
-          </div>
-        </div>
-      </section>
-
-      {/* OFFER SECTION - REESTRUTURADA */}
-      <section id="oferta" className="py-24 bg-[#0a0a0a] border-t border-white/5">
-        <div className="container mx-auto px-5 max-w-4xl">
-          <div className="bg-gradient-to-b from-[#111] to-black border border-[#c5a059]/40 rounded-[32px] p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
-            
-            <div className="bg-[#c5a059] text-black px-6 py-1.5 rounded-full font-black text-[10px] uppercase tracking-widest mx-auto inline-block mb-6">
-              Oferta válida por tempo limitado
+              <img src="/images/mockup-premium-magnetus.png" alt="Mockup premium Magnetus III e Antivalor" className="w-full border border-[#c5a059]/20 shadow-[0_28px_90px_rgba(0,0,0,0.5)]" />
             </div>
 
-            {/* COUNTDOWN TIMER */}
-            <div className="flex items-center justify-center gap-3 mb-10">
-              <Clock size={16} className="text-[#c5a059]" />
-              <div className="flex items-center gap-1">
-                {[{ v: countdown.h, l: 'h' }, { v: countdown.m, l: 'm' }, { v: countdown.s, l: 's' }].map((t, i) => (
-                  <React.Fragment key={i}>
-                    <div className="bg-[#1a1a1a] border border-[#c5a059]/30 px-3 py-2 rounded text-center min-w-[48px]">
-                      <span className="text-[#c5a059] font-black text-xl">{pad(t.v)}</span>
-                      <span className="text-gray-600 text-[8px] uppercase block">{t.l}</span>
-                    </div>
-                    {i < 2 && <span className="text-[#c5a059] font-black text-xl">:</span>}
-                  </React.Fragment>
+            <div className="mt-16 grid gap-5 md:grid-cols-3">
+              {protocolSteps.map((step) => (
+                <article key={step.phase} className="border border-white/10 bg-[#11100d] p-7">
+                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#c5a059]">{step.phase}</p>
+                  <h3 className="mt-5 text-2xl font-black uppercase leading-tight text-[#f4ead8]">{step.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-[#aaa194]">{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="autora" className="border-y border-white/5 bg-[#0f0e0b] py-24">
+          <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[340px_1fr] md:px-8">
+            <div className="relative mx-auto w-72 max-w-full md:mx-0">
+              <div className="absolute inset-0 translate-x-4 translate-y-4 border border-[#c5a059]" />
+              <img src="/images/autora-sol-lima.jpg" alt="Sol Lima" className="relative aspect-[3/4] w-full object-cover grayscale transition-all duration-700 hover:grayscale-0" />
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">A criadora do método</span>
+              <h2 className="mt-4 text-4xl font-black uppercase tracking-tight text-[#f4ead8] md:text-6xl">Sol Lima</h2>
+              <div className="mt-7 max-w-3xl space-y-5 text-base leading-relaxed text-[#bdb4a5] md:text-lg">
+                <p className="text-xl font-bold text-[#f4ead8]">Eu estudo presença, magnetismo e os sinais que mudam a forma como uma pessoa é percebida.</p>
+                <p>O Magnetus nasceu da observação de homens capazes que perdiam força social por detalhes de postura, fala, urgência emocional e falta de eixo.</p>
+                <p>Meu trabalho é traduzir comportamento, comunicação e autoimagem em práticas aplicáveis, sem vender manipulação e sem prometer controle sobre outras pessoas.</p>
+              </div>
+              <blockquote className="mt-8 border border-[#c5a059]/25 bg-[#090806] p-6 text-lg font-bold italic leading-relaxed text-[#f4ead8]">
+                "Presença não é barulho. É coerência entre corpo, fala, decisão e autocontrole."
+              </blockquote>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#090806] py-24">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Segurança da compra</span>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">
+                  Compra segura, acesso imediato e garantia real.
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-[#bdb4a5]">
+                  Você recebe os materiais no e-mail após a confirmação. Se dentro de 7 dias perceber que não é para você, solicite o reembolso pela própria plataforma.
+                </p>
+              </div>
+              <div className="grid gap-5 md:grid-cols-[0.7fr_1fr] md:items-center">
+                <img src="/images/garantia-7-dias-premium.png" alt="Selo de garantia de 7 dias" className="mx-auto w-full max-w-xs rounded-full" />
+                <img src="/images/selos-premium-magnetus.png" alt="Selos premium, acesso imediato e compra segura" className="w-full border border-[#c5a059]/20" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#0f0e0b] py-24">
+          <div className="mx-auto max-w-6xl px-5 md:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Prova social</span>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">
+                Homens que aplicaram o protocolo
+              </h2>
+              <div className="mt-6 flex items-center justify-center gap-2">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} size={18} className="fill-[#c5a059] text-[#c5a059]" />
                 ))}
+                <span className="ml-2 text-sm text-[#aaa194]">Relatos de compradores</span>
               </div>
             </div>
-
-            <img src="/images/combo-magn-masc.png" alt="Combo Magnetus Masculino" className="w-full max-w-sm mx-auto mb-10 rounded-xl shadow-lg" />
-
-            {/* VALUE STACK */}
-            <div className="max-w-md mx-auto mb-10 text-left">
-              <h3 className="text-lg font-black text-white uppercase tracking-wide mb-6 text-center">O que recebes hoje:</h3>
-              {[
-                { item: "Magnetus III — A Engenharia da Presença", valor: "R$ 127,00" },
-                { item: "Antídoto do Antivalor — Extermínio da Sabotagem", valor: "R$ 67,00" },
-                { item: "Acesso Vitalício + Actualizações Futuras", valor: "R$ 47,00" }
-              ].map((s, i) => (
-                <div key={i} className="flex items-center justify-between py-3 border-b border-white/5">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 size={16} className="text-[#c5a059] shrink-0" />
-                    <span className="text-gray-300 text-sm">{s.item}</span>
+            <div className="mt-12 grid gap-5 md:grid-cols-3">
+              {testimonials.map((testimonial) => (
+                <article key={testimonial.name} className="relative border border-white/10 bg-[#090806] p-6">
+                  <MessageSquareQuote size={24} className="absolute right-5 top-5 text-[#c5a059]/35" />
+                  <div className="mb-5 flex gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} size={12} className="fill-[#c5a059] text-[#c5a059]" />
+                    ))}
                   </div>
-                  <span className="text-gray-600 line-through text-sm shrink-0 ml-4">{s.valor}</span>
-                </div>
-              ))}
-              <div className="flex items-center justify-between py-3 border-b-2 border-[#c5a059]/30">
-                <span className="text-white font-bold">Valor Total</span>
-                <span className="text-gray-500 line-through font-bold">R$ 241,00</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-2 mb-10">
-              <span className="text-white text-xs uppercase font-bold tracking-widest">Hoje, leva tudo por apenas</span>
-              <span className="text-[#c5a059] text-6xl md:text-8xl font-black">R$ 79,90</span>
-              <span className="text-gray-400 text-sm font-bold mt-2">ou 6x de R$ 13,32 no cartão</span>
-            </div>
-
-            <button 
-              onClick={handleCheckout}
-              className="group w-full max-w-md bg-[#c5a059] text-black py-7 rounded-sm font-black text-xl hover:bg-[#d4b477] transition-all flex items-center justify-center gap-4 mb-4 shadow-[0_15px_40px_rgba(197,160,89,0.3)] mx-auto cursor-pointer animate-pulse hover:animate-none"
-            >
-              QUERO MEU ACESSO AGORA
-              <ArrowRight size={24} />
-            </button>
-            <p className="text-gray-600 text-xs mb-8"><Lock size={12} className="inline mr-1" />Pagamento 100% seguro via Kiwify • Ambiente criptografado</p>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 border-t border-white/5 pt-8">
-              {[
-                { icon: <Lock size={16}/>, label: "Acesso Imediato" },
-                { icon: <ShieldCheck size={16}/>, label: "Pagamento Seguro" },
-                { icon: <Star size={16}/>, label: "7 Dias Garantia" },
-                { icon: <CheckCircle2 size={16}/>, label: "Conteúdo Prático" }
-              ].map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center gap-2">
-                  <div className="text-[#c5a059]">{item.icon}</div>
-                  <span className="text-[8px] font-bold text-gray-500 uppercase tracking-widest">{item.label}</span>
-                </div>
+                  <p className="min-h-[120px] text-sm italic leading-relaxed text-[#d8d0c1]">"{testimonial.text}"</p>
+                  <div className="mt-6 border-t border-white/10 pt-4">
+                    <p className="text-sm font-black text-[#f4ead8]">{testimonial.name}</p>
+                    <p className="mt-1 text-xs text-[#7e7568]">{testimonial.age}</p>
+                  </div>
+                </article>
               ))}
             </div>
-
+            <p className="mt-8 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#7e7568]">Nomes abreviados para preservar privacidade.</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* GARANTIA DEDICADA */}
-      <section className="py-20 bg-black">
-        <div className="container mx-auto px-6 max-w-3xl text-center">
-          <div className="bg-[#111] border border-[#c5a059]/20 rounded-2xl p-10 md:p-16">
-            <div className="text-6xl mb-6">🛡️</div>
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-6">Garantia Blindada de <span className="text-[#c5a059]">7 Dias</span></h2>
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-6">
-              Se em 7 dias não sentires a tua presença a mudar, se não notares as pessoas a olhar-te de forma diferente, se não sentires o teu eixo a reposicionar-se — <strong className="text-white">devolvemos cada centavo</strong>.
-            </p>
-            <p className="text-[#c5a059] font-bold uppercase tracking-wider text-sm">Sem perguntas. Sem burocracia. O risco é todo nosso.</p>
-          </div>
-        </div>
-      </section>
+        <section id="oferta" className="bg-[#090806] py-24">
+          <div className="mx-auto max-w-5xl px-5 md:px-8">
+            <div className="relative overflow-hidden border border-[#c5a059]/40 bg-[linear-gradient(180deg,#14120e_0%,#080705_100%)] p-6 shadow-[0_32px_120px_rgba(0,0,0,0.58)] md:p-14">
+              <div className="absolute right-0 top-0 h-72 w-72 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#c5a059]/15 blur-3xl" />
+              <div className="relative grid gap-10 md:grid-cols-[0.92fr_1.08fr] md:items-center">
+                <div>
+                  <div className="mb-6 inline-flex bg-[#c5a059] px-5 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#090806]">
+                    Lote promocional disponível
+                  </div>
+                  <img src="/images/combo-magnetus-masculino-original.jpeg" alt="Combo completo Magnetus Masculino" className="w-full border border-[#c5a059]/20 shadow-[0_26px_80px_rgba(0,0,0,0.45)]" />
+                </div>
 
-      {/* FAQ */}
-      <section className="py-24 bg-[#0a0a0a]">
-        <div className="container mx-auto px-6 max-w-3xl">
-          <div className="text-center mb-16">
-            <span className="text-[#c5a059] font-bold text-[10px] uppercase tracking-widest">Dúvidas Frequentes</span>
-            <h2 className="text-3xl md:text-4xl font-black mt-4 uppercase">Ainda tens questões?</h2>
-          </div>
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className={`bg-[#111] border rounded-xl overflow-hidden transition-all duration-300 ${openFaq === idx ? 'border-[#c5a059]/40' : 'border-white/5'}`}>
-                <button className="w-full flex items-center justify-between p-5 text-left cursor-pointer" onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
-                  <span className="font-bold text-white text-sm md:text-base pr-4">{faq.q}</span>
-                  <ChevronDown size={18} className={`text-[#c5a059] shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-[200px] pb-5 px-5' : 'max-h-0'}`}>
-                  <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+                <div>
+                  <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-[#f4ead8] md:text-6xl">
+                    Acesso completo ao Magnetus III
+                  </h2>
+                  <div className="mt-7 space-y-3">
+                    {receiveStack.map((row) => (
+                      <div key={row.item} className="flex items-start justify-between gap-4 border-b border-white/10 pb-3">
+                        <div className="flex gap-3">
+                          <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#c5a059]" />
+                          <span className="text-sm leading-relaxed text-[#d8d0c1]">{row.item}</span>
+                        </div>
+                        <span className="shrink-0 text-sm font-bold text-[#7e7568] line-through">{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-5 flex items-center justify-between border-b-2 border-[#c5a059]/30 pb-4">
+                    <span className="text-base font-black uppercase text-[#f4ead8]">Valor total</span>
+                    <span className="text-base font-black text-[#7e7568] line-through">R$ 288,00</span>
+                  </div>
+
+                  <div className="mt-8">
+                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#c5a059]">Hoje por apenas</p>
+                    <p className="mt-1 text-6xl font-black tracking-tight text-[#c5a059] md:text-8xl">R$ 79,90</p>
+                    <p className="mt-2 text-sm font-bold text-[#aaa194]">ou 6x de R$ 13,32 no cartão</p>
+                  </div>
+
+                  <button type="button" onClick={handleCheckout} className="group mt-8 flex w-full items-center justify-center gap-3 rounded-sm bg-[#c5a059] px-8 py-6 text-lg font-black uppercase tracking-wide text-[#090806] shadow-[0_18px_46px_rgba(197,160,89,0.28)] transition-all hover:bg-[#d8b86d] active:translate-y-px">
+                    Quero começar agora
+                    <ArrowRight size={22} className="transition-transform group-hover:translate-x-1" />
+                  </button>
+                  <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-[#8f8678]">
+                    <Lock size={13} /> Pagamento seguro via Kiwify. Acesso enviado por e-mail.
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* CTA FINAL */}
-          <div className="text-center mt-16">
-            <button onClick={handleCheckout} className="group px-10 py-6 bg-[#c5a059] text-black font-black text-lg uppercase rounded-sm hover:bg-[#d4b477] transition-all cursor-pointer inline-flex items-center gap-3 shadow-[0_15px_40px_rgba(197,160,89,0.3)]">
-              QUERO ACTIVAR MEU MAGNETISMO
-              <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </button>
-            <p className="text-gray-600 text-xs mt-4">Acesso imediato • Garantia de 7 dias • Pagamento seguro</p>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER PROFISSIONAL */}
-      <footer className="py-12 bg-black border-t border-white/5">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-[#c5a059] rounded-full flex items-center justify-center">
-                <span className="text-black font-black text-sm italic">M</span>
-              </div>
-              <span className="text-[#c5a059] font-black tracking-widest text-xs uppercase">Magnetus III</span>
-            </div>
-            <div className="flex items-center gap-6 text-gray-600 text-[10px] uppercase tracking-widest font-bold">
-              <a href="#" className="hover:text-[#c5a059] transition-colors">Política de Privacidade</a>
-              <a href="#" className="hover:text-[#c5a059] transition-colors">Termos de Uso</a>
-              <a href="mailto:contato@sollimastudio.com" className="hover:text-[#c5a059] transition-colors">Contacto</a>
             </div>
           </div>
-          <div className="border-t border-white/5 pt-6 text-center">
-            <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-700">Magnetus III &copy; {new Date().getFullYear()} — Sollima Studio • Todos os direitos reservados</p>
-            <p className="text-[8px] text-gray-800 mt-2">Este produto não garante resultados específicos. Os resultados variam de pessoa para pessoa.</p>
+        </section>
+
+        <section className="bg-[#090806] pb-24">
+          <div className="mx-auto max-w-3xl px-5 md:px-8">
+            <div className="mb-12 text-center">
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#c5a059]">Dúvidas frequentes</span>
+              <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-[#f4ead8] md:text-4xl">Antes de entrar</h2>
+            </div>
+            <div className="space-y-3">
+              {faqs.map((faq, idx) => (
+                <div key={faq.q} className={`overflow-hidden border bg-[#11100d] transition-colors ${openFaq === idx ? 'border-[#c5a059]/45' : 'border-white/10'}`}>
+                  <button type="button" className="flex w-full items-center justify-between gap-4 p-5 text-left" onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
+                    <span className="text-sm font-black text-[#f4ead8] md:text-base">{faq.q}</span>
+                    <ChevronDown size={18} className={`shrink-0 text-[#c5a059] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-56 px-5 pb-5' : 'max-h-0 px-5'}`}>
+                    <p className="text-sm leading-relaxed text-[#aaa194]">{faq.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-white/10 bg-[#070604] py-12">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-7 px-5 md:flex-row md:px-8">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#c5a059] text-sm font-black italic text-[#090806]">M</span>
+            <span className="text-xs font-black uppercase tracking-[0.18em] text-[#c5a059]">Magnetus III</span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#7e7568]">
+            <a href="/politica-de-privacidade.html" className="transition-colors hover:text-[#c5a059]">Política de Privacidade</a>
+            <a href="/termos-de-uso.html" className="transition-colors hover:text-[#c5a059]">Termos de Uso</a>
+            <a href="mailto:contato@sollimastudio.com" className="transition-colors hover:text-[#c5a059]">Contato</a>
           </div>
         </div>
+        <p className="mx-auto mt-8 max-w-4xl px-5 text-center text-[10px] leading-relaxed text-[#686054]">
+          Magnetus III &copy; {new Date().getFullYear()} Sollima Studio. Este produto não garante resultados específicos. Resultados variam conforme aplicação individual.
+        </p>
       </footer>
 
+      <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-[#c5a059]/30 bg-[#090806]/96 px-4 py-3 backdrop-blur-md md:hidden">
+        <button type="button" onClick={handleCheckout} className="flex w-full items-center justify-center gap-2 rounded-sm bg-[#c5a059] px-5 py-4 text-sm font-black uppercase tracking-wide text-[#090806] shadow-[0_10px_30px_rgba(197,160,89,0.25)]">
+          Começar agora - R$ 79,90
+          <ArrowRight size={18} />
+        </button>
+      </div>
     </div>
   );
 };
