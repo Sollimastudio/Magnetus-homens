@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #c5a059;
-  --color-brand-hover: #d4b477;
+  --color-brand: #FFD700;
+  --color-brand-hover: #FFF44F;
 }
 
 body {
@@ -18,7 +18,7 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid #c5a059;
+  outline: 3px solid #FFD700;
   outline-offset: 4px;
 }
 
