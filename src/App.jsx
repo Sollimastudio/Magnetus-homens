@@ -9,6 +9,7 @@ import {
   Lock,
   Menu,
   MessageSquareQuote,
+  ShieldCheck,
   Star,
   Target,
   X,
@@ -145,6 +146,116 @@ const faqs = [
   },
 ];
 
+function ProductComboCard() {
+  return (
+    <div className="relative mx-auto w-full max-w-lg">
+      <div className="absolute -inset-8 rounded-full bg-[#CFA34A]/15 blur-3xl" />
+      <div className="relative overflow-hidden rounded-2xl border border-[#CFA34A]/25 bg-[radial-gradient(circle_at_top_right,rgba(207,163,74,.20),transparent_35%),linear-gradient(145deg,#18130b,#080705_58%,#1b1207)] p-6 shadow-[0_26px_90px_rgba(0,0,0,0.55)]">
+        <div className="grid grid-cols-2 gap-4">
+          {[
+            ['MAGNETUS III', 'Protocolo de Presença', '15 dias'],
+            ['ANTIVALOR', 'Mapa dos Vazamentos', 'Bônus'],
+          ].map(([title, subtitle, badge]) => (
+            <div key={title} className="min-h-[250px] rounded-xl border border-[#CFA34A]/35 bg-[#090806] p-5 shadow-[inset_0_0_45px_rgba(207,163,74,.08)]">
+              <div className="mb-10 inline-flex rounded-full bg-[#CFA34A] px-3 py-1 text-[10px] font-black uppercase tracking-[.16em] text-[#090806]">{badge}</div>
+              <p className="text-2xl font-black uppercase leading-none text-[#CFA34A]">{title}</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#d8d0c1]">{subtitle}</p>
+              <div className="mt-10 h-1 w-16 bg-[#CFA34A]" />
+            </div>
+          ))}
+        </div>
+        <div className="mt-5 border border-[#CFA34A]/25 bg-[#090806]/80 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Dois materiais. Uma correção.</p>
+          <p className="mt-1 text-sm font-bold text-[#f4ead8]">Diagnosticar os vazamentos de valor e treinar presença com eixo, limite e autocontrole.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MockupPanel() {
+  return (
+    <div className="w-full border border-[#CFA34A]/20 bg-[linear-gradient(145deg,#15120e,#070604)] p-6 shadow-[0_28px_90px_rgba(0,0,0,0.5)]">
+      <div className="grid gap-5 md:grid-cols-2">
+        {[
+          ['MAGNETUS III', 'Protocolo de Presença Masculina', 'postura · voz · silêncio · limite'],
+          ['ANTIVALOR', 'Mapa dos Sinais que Reduzem Valor', 'pressa · carência · reatividade'],
+        ].map(([title, subtitle, tags]) => (
+          <div key={title} className="min-h-[320px] border border-[#CFA34A]/30 bg-[#090806] p-6">
+            <p className="text-[10px] font-black uppercase tracking-[.22em] text-[#CFA34A]">material digital</p>
+            <h3 className="mt-12 text-4xl font-black uppercase leading-none text-[#f4ead8]">{title}</h3>
+            <p className="mt-5 text-sm font-bold uppercase tracking-[.14em] text-[#CFA34A]">{subtitle}</p>
+            <p className="mt-16 border-t border-white/10 pt-5 text-xs font-bold uppercase tracking-[.14em] text-[#8f8678]">{tags}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BeforeAfterVisual() {
+  return (
+    <div className="relative overflow-hidden border border-[#CFA34A]/20 bg-[#11100d] p-7 min-h-[360px]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(207,163,74,.18),transparent_35%)]" />
+      <div className="relative grid h-full gap-4 sm:grid-cols-2">
+        <div className="flex min-h-[260px] flex-col justify-between border border-red-900/35 bg-red-950/10 p-5">
+          <p className="text-[10px] font-black uppercase tracking-[0.24em] text-red-300">antes</p>
+          <div>
+            <p className="text-3xl font-black uppercase leading-none text-[#f4ead8]">Reativo</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#aaa194]">pressa, excesso de explicação, urgência e busca de aprovação</p>
+          </div>
+        </div>
+        <div className="flex min-h-[260px] flex-col justify-between border border-[#CFA34A]/45 bg-[#CFA34A]/10 p-5">
+          <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">depois</p>
+          <div>
+            <p className="text-3xl font-black uppercase leading-none text-[#f4ead8]">Comando de si</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#d8d0c1]">postura, silêncio, limite, autocontrole e presença sustentada</p>
+          </div>
+        </div>
+      </div>
+      <div className="relative mt-5 border-t border-[#CFA34A]/20 pt-5">
+        <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Antes e depois</p>
+        <p className="mt-2 max-w-md text-lg font-black uppercase leading-tight text-[#f4ead8]">Da reatividade para o comando de si.</p>
+      </div>
+    </div>
+  );
+}
+
+function AuthorVisual() {
+  return (
+    <div className="relative mx-auto w-72 max-w-full md:mx-0">
+      <div className="absolute inset-0 translate-x-4 translate-y-4 border border-[#CFA34A]" />
+      <div className="relative flex aspect-[3/4] w-full flex-col justify-end overflow-hidden border border-[#CFA34A]/25 bg-[radial-gradient(circle_at_top,rgba(207,163,74,.28),transparent_42%),linear-gradient(180deg,#1b140a,#070604)] p-7">
+        <div className="absolute left-7 top-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#CFA34A] text-2xl font-black text-[#090806]">S</div>
+        <div>
+          <p className="text-[10px] font-black uppercase tracking-[.28em] text-[#CFA34A]">criadora do método</p>
+          <h3 className="mt-3 text-5xl font-black uppercase leading-none text-[#f4ead8]">Sol<br />Lima</h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SecurityVisuals() {
+  return (
+    <div className="grid gap-5 md:grid-cols-[0.7fr_1fr] md:items-center">
+      <div className="mx-auto flex aspect-square w-full max-w-xs flex-col items-center justify-center rounded-full border border-[#CFA34A]/35 bg-[#11100d] p-8 text-center shadow-[0_0_60px_rgba(207,163,74,.12)]">
+        <ShieldCheck size={64} className="text-[#CFA34A]" />
+        <p className="mt-5 text-5xl font-black text-[#CFA34A]">7</p>
+        <p className="text-xs font-black uppercase tracking-[.22em] text-[#f4ead8]">dias de garantia</p>
+      </div>
+      <div className="grid gap-4">
+        {['Pagamento seguro', 'Acesso imediato por e-mail', 'Material digital em PDF', 'Garantia real pela plataforma'].map((item) => (
+          <div key={item} className="flex items-center gap-4 border border-[#CFA34A]/20 bg-[#11100d] p-5">
+            <CheckCircle2 className="shrink-0 text-[#CFA34A]" size={20} />
+            <p className="text-sm font-black uppercase tracking-[.12em] text-[#d8d0c1]">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -226,12 +337,9 @@ const App = () => {
       </nav>
 
       <main id="conteudo">
-        <section className="relative min-h-[100dvh] overflow-hidden">
-          <div className="absolute inset-0">
-            <img src="/images/hero.png" alt="Homem em atmosfera noturna sofisticada" className="h-full w-full scale-105 object-cover object-[60%_center] opacity-90" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(207,163,74,0.10),transparent_35%),linear-gradient(90deg,#090806_0%,rgba(9,8,6,0.76)_34%,rgba(9,8,6,0.26)_68%,rgba(9,8,6,0.36)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#090806] via-[#090806]/50 to-transparent" />
-          </div>
+        <section className="relative min-h-[100dvh] overflow-hidden bg-[radial-gradient(circle_at_75%_18%,rgba(207,163,74,.22),transparent_30%),radial-gradient(circle_at_90%_72%,rgba(102,57,12,.28),transparent_36%),linear-gradient(100deg,#090806_0%,#0b0906_45%,#17100a_100%)]">
+          <div className="absolute inset-0 opacity-[.08] [background-image:linear-gradient(rgba(207,163,74,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(207,163,74,.35)_1px,transparent_1px)] [background-size:64px_64px]" />
+          <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#090806] via-[#090806]/50 to-transparent" />
 
           <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.05fr_0.95fr] md:px-8 md:pt-32">
             <div>
@@ -267,14 +375,7 @@ const App = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-lg">
-              <div className="absolute -inset-8 rounded-full bg-[#CFA34A]/15 blur-3xl" />
-              <img src="/images/combo-magnetus-masculino-original.jpeg" alt="Combo completo Magnetus III e Antivalor" className="relative w-full rounded-2xl border border-[#CFA34A]/25 shadow-[0_26px_90px_rgba(0,0,0,0.55)]" />
-              <div className="absolute -bottom-5 left-5 right-5 border border-[#CFA34A]/30 bg-[#090806]/88 p-4 backdrop-blur-md">
-                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Dois materiais. Uma correção.</p>
-                <p className="mt-1 text-sm font-bold text-[#f4ead8]">Diagnosticar os vazamentos de valor e treinar presença com eixo, limite e autocontrole.</p>
-              </div>
-            </div>
+            <ProductComboCard />
           </div>
         </section>
 
@@ -410,7 +511,7 @@ const App = () => {
                   O combo une o Magnetus III ao Antivalor. Um material mostra o que enfraquece sua presença por dentro, o outro organiza práticas para reconstruir eixo por repetição.
                 </p>
               </div>
-              <img src="/images/mockup-premium-magnetus.png" alt="Mockup premium Magnetus III e Antivalor" className="w-full border border-[#CFA34A]/20 shadow-[0_28px_90px_rgba(0,0,0,0.5)]" />
+              <MockupPanel />
             </div>
 
             <div className="mt-16 grid gap-5 md:grid-cols-3">
@@ -427,13 +528,7 @@ const App = () => {
 
         <section className="bg-[#090806] py-24">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[0.95fr_1.05fr] md:items-center md:px-8">
-            <div className="relative overflow-hidden border border-[#CFA34A]/20 bg-[#11100d]">
-              <img src="/images/antes-depois-protocolo.png" alt="Antes e depois do protocolo Magnetus" className="h-full min-h-[360px] w-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#090806] to-transparent p-6 pt-24">
-                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Antes e depois</p>
-                <p className="mt-2 max-w-md text-lg font-black uppercase leading-tight text-[#f4ead8]">Da reatividade para o comando de si.</p>
-              </div>
-            </div>
+            <BeforeAfterVisual />
 
             <div>
               <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">O que muda na prática</span>
@@ -454,10 +549,7 @@ const App = () => {
 
         <section id="autora" className="border-y border-white/5 bg-[#0f0e0b] py-24">
           <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[340px_1fr] md:px-8">
-            <div className="relative mx-auto w-72 max-w-full md:mx-0">
-              <div className="absolute inset-0 translate-x-4 translate-y-4 border border-[#CFA34A]" />
-              <img src="/images/autora-sol-lima.jpg" alt="Sol Lima" className="relative aspect-[3/4] w-full object-cover grayscale transition-all duration-700 hover:grayscale-0" />
-            </div>
+            <AuthorVisual />
             <div>
               <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">A criadora do método</span>
               <h2 className="mt-4 text-4xl font-black uppercase tracking-tight text-[#f4ead8] md:text-6xl">Sol Lima</h2>
@@ -485,10 +577,7 @@ const App = () => {
                   Você recebe os materiais no e-mail após a confirmação. Se dentro de 7 dias perceber que não é para você, solicite o reembolso pela própria plataforma.
                 </p>
               </div>
-              <div className="grid gap-5 md:grid-cols-[0.7fr_1fr] md:items-center">
-                <img src="/images/garantia-7-dias-premium.png" alt="Selo de garantia de 7 dias" className="mx-auto w-full max-w-xs rounded-full" />
-                <img src="/images/selos-premium-magnetus.png" alt="Selos premium, acesso imediato e compra segura" className="w-full border border-[#CFA34A]/20" />
-              </div>
+              <SecurityVisuals />
             </div>
           </div>
         </section>
@@ -537,7 +626,7 @@ const App = () => {
                   <div className="mb-6 inline-flex bg-[#CFA34A] px-5 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#090806]">
                     Lote promocional disponível
                   </div>
-                  <img src="/images/combo-magnetus-masculino-original.jpeg" alt="Combo completo Magnetus Masculino" className="w-full border border-[#CFA34A]/20 shadow-[0_26px_80px_rgba(0,0,0,0.45)]" />
+                  <ProductComboCard />
                 </div>
 
                 <div>
