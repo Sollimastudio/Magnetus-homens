@@ -15,6 +15,12 @@ import {
   X,
 } from 'lucide-react';
 
+const productImages = {
+  magnetus: '/images/ebook-magnetus-3.jpeg',
+  antidoto: '/images/bonus-antidoto.jpeg',
+  combo: '/images/combo-magnetus-masculino-original.jpeg',
+};
+
 const navItems = [
   { label: 'Diagnóstico', id: 'diagnostico' },
   { label: 'Antivalor', id: 'antivalor' },
@@ -146,48 +152,60 @@ const faqs = [
   },
 ];
 
-function ProductComboCard() {
+function ProductComboCard({ compact = false }) {
   return (
-    <div className="relative mx-auto w-full max-w-lg">
-      <div className="absolute -inset-8 rounded-full bg-[#CFA34A]/15 blur-3xl" />
-      <div className="relative overflow-hidden rounded-2xl border border-[#CFA34A]/25 bg-[radial-gradient(circle_at_top_right,rgba(207,163,74,.20),transparent_35%),linear-gradient(145deg,#18130b,#080705_58%,#1b1207)] p-6 shadow-[0_26px_90px_rgba(0,0,0,0.55)]">
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            ['MAGNETUS III', 'Protocolo de Presença', '15 dias'],
-            ['ANTIVALOR', 'Mapa dos Vazamentos', 'Bônus'],
-          ].map(([title, subtitle, badge]) => (
-            <div key={title} className="min-h-[250px] rounded-xl border border-[#CFA34A]/35 bg-[#090806] p-5 shadow-[inset_0_0_45px_rgba(207,163,74,.08)]">
-              <div className="mb-10 inline-flex rounded-full bg-[#CFA34A] px-3 py-1 text-[10px] font-black uppercase tracking-[.16em] text-[#090806]">{badge}</div>
-              <p className="text-2xl font-black uppercase leading-none text-[#CFA34A]">{title}</p>
-              <p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#d8d0c1]">{subtitle}</p>
-              <div className="mt-10 h-1 w-16 bg-[#CFA34A]" />
-            </div>
-          ))}
-        </div>
-        <div className="mt-5 border border-[#CFA34A]/25 bg-[#090806]/80 p-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Dois materiais. Uma correção.</p>
-          <p className="mt-1 text-sm font-bold text-[#f4ead8]">Diagnosticar os vazamentos de valor e treinar presença com eixo, limite e autocontrole.</p>
-        </div>
+    <div className="relative mx-auto w-full max-w-2xl">
+      <div className="absolute -inset-6 rounded-[2rem] bg-[#CFA34A]/15 blur-3xl" />
+      <div className="relative overflow-hidden rounded-2xl border border-[#CFA34A]/35 bg-[#090806] p-2 shadow-[0_26px_90px_rgba(0,0,0,0.55)]">
+        <img
+          src={productImages.combo}
+          alt="Combo completo Magnetus III e Antídoto do Antivalor"
+          className={`w-full rounded-xl object-cover ${compact ? 'max-h-[560px]' : 'max-h-[640px]'}`}
+          loading={compact ? 'lazy' : 'eager'}
+        />
+      </div>
+      <div className="relative mx-4 -mt-5 border border-[#CFA34A]/30 bg-[#090806]/92 p-4 backdrop-blur-md">
+        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Dois materiais. Uma correção.</p>
+        <p className="mt-1 text-sm font-bold text-[#f4ead8]">Diagnosticar os vazamentos de valor e treinar presença com eixo, limite e autocontrole.</p>
       </div>
     </div>
   );
 }
 
+function ProductCoverCard({ image, title, subtitle, text, badge }) {
+  return (
+    <article className="overflow-hidden border border-[#CFA34A]/25 bg-[#11100d] shadow-[0_28px_90px_rgba(0,0,0,0.42)]">
+      <div className="relative bg-[#090806] p-3">
+        <img src={image} alt={title} className="aspect-[3/4] w-full rounded-sm object-cover" loading="lazy" />
+        <div className="absolute left-6 top-6 rounded-full bg-[#CFA34A] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-[#090806]">{badge}</div>
+      </div>
+      <div className="p-6">
+        <h3 className="text-2xl font-black uppercase leading-tight text-[#f4ead8]">{title}</h3>
+        <p className="mt-2 text-sm font-black uppercase tracking-[0.16em] text-[#CFA34A]">{subtitle}</p>
+        <p className="mt-4 text-sm leading-relaxed text-[#aaa194]">{text}</p>
+      </div>
+    </article>
+  );
+}
+
 function MockupPanel() {
   return (
-    <div className="w-full border border-[#CFA34A]/20 bg-[linear-gradient(145deg,#15120e,#070604)] p-6 shadow-[0_28px_90px_rgba(0,0,0,0.5)]">
-      <div className="grid gap-5 md:grid-cols-2">
-        {[
-          ['MAGNETUS III', 'Protocolo de Presença Masculina', 'postura · voz · silêncio · limite'],
-          ['ANTIVALOR', 'Mapa dos Sinais que Reduzem Valor', 'pressa · carência · reatividade'],
-        ].map(([title, subtitle, tags]) => (
-          <div key={title} className="min-h-[320px] border border-[#CFA34A]/30 bg-[#090806] p-6">
-            <p className="text-[10px] font-black uppercase tracking-[.22em] text-[#CFA34A]">material digital</p>
-            <h3 className="mt-12 text-4xl font-black uppercase leading-none text-[#f4ead8]">{title}</h3>
-            <p className="mt-5 text-sm font-bold uppercase tracking-[.14em] text-[#CFA34A]">{subtitle}</p>
-            <p className="mt-16 border-t border-white/10 pt-5 text-xs font-bold uppercase tracking-[.14em] text-[#8f8678]">{tags}</p>
-          </div>
-        ))}
+    <div className="w-full border border-[#CFA34A]/20 bg-[linear-gradient(145deg,#15120e,#070604)] p-4 shadow-[0_28px_90px_rgba(0,0,0,0.5)] md:p-6">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <ProductCoverCard
+          image={productImages.magnetus}
+          title="Magnetus III"
+          subtitle="Protocolo de presença"
+          badge="15 dias"
+          text="Postura, voz, silêncio, limite e autocontrole para comunicar valor sem precisar provar valor."
+        />
+        <ProductCoverCard
+          image={productImages.antidoto}
+          title="Antídoto do Antivalor"
+          subtitle="Bônus estratégico"
+          badge="bônus"
+          text="Mapa dos sinais invisíveis de pressa, carência e reatividade que reduzem seu valor percebido."
+        />
       </div>
     </div>
   );
@@ -341,7 +359,7 @@ const App = () => {
           <div className="absolute inset-0 opacity-[.08] [background-image:linear-gradient(rgba(207,163,74,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(207,163,74,.35)_1px,transparent_1px)] [background-size:64px_64px]" />
           <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#090806] via-[#090806]/50 to-transparent" />
 
-          <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.05fr_0.95fr] md:px-8 md:pt-32">
+          <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[0.95fr_1.05fr] md:px-8 md:pt-32">
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#CFA34A]/35 bg-[#090806]/70 px-4 py-2 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#CFA34A]" />
@@ -618,15 +636,15 @@ const App = () => {
         </section>
 
         <section id="oferta" className="bg-[#090806] py-24">
-          <div className="mx-auto max-w-5xl px-5 md:px-8">
-            <div className="relative overflow-hidden border border-[#CFA34A]/40 bg-[linear-gradient(180deg,#14120e_0%,#080705_100%)] p-6 shadow-[0_32px_120px_rgba(0,0,0,0.58)] md:p-14">
+          <div className="mx-auto max-w-6xl px-5 md:px-8">
+            <div className="relative overflow-hidden border border-[#CFA34A]/40 bg-[linear-gradient(180deg,#14120e_0%,#080705_100%)] p-5 shadow-[0_32px_120px_rgba(0,0,0,0.58)] md:p-10">
               <div className="absolute right-0 top-0 h-72 w-72 translate-x-1/3 -translate-y-1/3 rounded-full bg-[#CFA34A]/15 blur-3xl" />
-              <div className="relative grid gap-10 md:grid-cols-[0.92fr_1.08fr] md:items-center">
+              <div className="relative grid gap-10 md:grid-cols-[1fr_.88fr] md:items-center">
                 <div>
                   <div className="mb-6 inline-flex bg-[#CFA34A] px-5 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#090806]">
-                    Lote promocional disponível
+                    Oferta por tempo limitado
                   </div>
-                  <ProductComboCard />
+                  <ProductComboCard compact />
                 </div>
 
                 <div>
@@ -659,7 +677,7 @@ const App = () => {
                   </div>
 
                   <button type="button" onClick={handleCheckout} className="gold-cta group mt-8 flex w-full items-center justify-center gap-3 rounded-sm px-8 py-6 text-lg font-black uppercase tracking-wide text-[#090806] transition-all active:translate-y-px">
-                    Quero cortar meu antivalor
+                    Quero meu acesso agora
                     <ArrowRight size={22} className="transition-transform group-hover:translate-x-1" />
                   </button>
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-[#8f8678]">
