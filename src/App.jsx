@@ -22,43 +22,43 @@ const productImages = {
 
 const navItems = [
   { label: 'Diagnóstico', id: 'diagnostico' },
-  { label: 'Antivalor', id: 'antivalor' },
-  { label: 'Protocolo', id: 'metodo' },
+  { label: 'Sinais', id: 'antivalor' },
+  { label: 'Método', id: 'metodo' },
   { label: 'Oferta', id: 'oferta' },
 ];
 
 const leakSignals = [
-  'Responde rápido demais para não perder atenção.',
-  'Explica demais para parecer interessante.',
-  'Insiste quando deveria observar.',
-  'Tenta impressionar antes de construir respeito.',
+  'Responde rápido demais com medo de perder a pessoa.',
+  'Explica tudo em excesso para tentar parecer interessante.',
+  'Insiste quando o melhor seria observar e esperar.',
+  'Tenta impressionar antes de criar respeito.',
   'Confunde intensidade com presença.',
-  'Aceita migalha de atenção e chama isso de estratégia.',
+  'Aceita pouco e chama isso de estratégia.',
 ];
 
 const symptoms = [
   {
     icon: <EyeOff size={28} />,
     title: 'Disponível demais',
-    text: 'Sua pressa comunica medo de perder espaço antes mesmo de existir espaço.',
+    text: 'Quando você está sempre pronto para tudo, passa a sensação de que não tem limite.',
   },
   {
     icon: <Brain size={28} />,
-    title: 'Ansioso demais',
-    text: 'Você responde, explica e insiste para aliviar ansiedade, não para comunicar presença.',
+    title: 'No modo ansiedade',
+    text: 'Você responde, explica e insiste para aliviar a própria tensão, não para se comunicar melhor.',
   },
   {
     icon: <Target size={28} />,
-    title: 'Provando valor demais',
-    text: 'O homem perde valor quando tenta provar valor. Postura fala antes da frase.',
+    title: 'Tentando se provar',
+    text: 'Quanto mais você tenta convencer, mais insegurança aparece. Calma, postura e limite falam primeiro.',
   },
 ];
 
 const fitList = [
-  'Homens que querem parar de procurar aprovação antes de agir.',
-  'Homens que querem corrigir carência, pressa, reatividade e excesso de explicação.',
-  'Homens que querem presença com postura, silêncio, limite e autocontrole.',
-  'Homens que preferem método direto a fantasia de guru alfa.',
+  'Homens que querem parar de agir buscando aprovação.',
+  'Homens que querem diminuir carência, pressa e excesso de explicação.',
+  'Homens que querem mais presença na postura, na fala e nas atitudes.',
+  'Homens que preferem um passo a passo direto, sem fantasia de guru alfa.',
 ];
 
 const notFitList = [
@@ -71,25 +71,25 @@ const notFitList = [
 const protocolSteps = [
   {
     phase: 'Dias 1-5',
-    title: 'Corte do Antivalor',
-    text: 'Identificar pressa, excesso de explicação, disponibilidade sem critério e busca de validação.',
+    title: 'Enxergar o problema',
+    text: 'Identificar pressa, excesso de explicação, disponibilidade sem critério e busca de aprovação.',
   },
   {
     phase: 'Dias 6-10',
-    title: 'Construção do Eixo',
-    text: 'Treinar postura, voz, olhar, silêncio, limite e pequenas decisões que comunicam firmeza.',
+    title: 'Ajustar seus sinais',
+    text: 'Treinar postura, voz, olhar, silêncio, limite e pequenas decisões que passam mais firmeza.',
   },
   {
     phase: 'Dias 11-15',
-    title: 'Aplicação Social',
-    text: 'Aplicar em conversas, encontros, trabalho e redes sociais sem transformar interesse em urgência.',
+    title: 'Aplicar na vida real',
+    text: 'Usar em conversas, encontros, trabalho e redes sociais sem transformar interesse em urgência.',
   },
 ];
 
 const beforeAfter = [
-  ['Antes', 'Responde para aliviar ansiedade, tenta explicar valor e fica disponível demais.'],
-  ['Durante', 'Observa vazamentos, corta antivalor e ajusta postura, voz, silêncio e limite.'],
-  ['Depois', 'Comunica menos carência, sustenta mais presença e para de perder eixo quando gosta.'],
+  ['Antes', 'Responde no impulso, explica demais e fica disponível além da conta.'],
+  ['Durante', 'Percebe os sinais de insegurança e ajusta postura, voz, silêncio e limite.'],
+  ['Depois', 'Mostra menos carência, sustenta mais presença e para de se perder quando gosta.'],
 ];
 
 const receiveStack = [
@@ -110,17 +110,20 @@ const testimonials = [
   {
     name: 'Ricardo M.',
     age: '34 anos',
-    text: 'Eu achava que precisava falar mais. O material me mostrou que meu problema era urgência, postura e excesso de explicação.',
+    avatar: '/images/profiles/ricardo.png',
+    text: 'Eu achava que precisava falar mais. O material me mostrou que eu estava passando pressa e explicando demais.',
   },
   {
     name: 'André S.',
     age: '28 anos',
-    text: 'O Antivalor bateu em pontos que eu fazia no automático. Em poucos dias comecei a perceber onde eu entregava carência.',
+    avatar: '/images/profiles/andre.png',
+    text: 'Fiquei inseguro de comprar porque já tinha visto muita promessa vazia. Aqui foi diferente: é direto, simples e dá para aplicar no mesmo dia.',
   },
   {
     name: 'Paulo F.',
     age: '41 anos',
-    text: 'A leitura é direta e aplicável. Não me vendeu fantasia. Me deu um roteiro para observar e corrigir comportamento.',
+    avatar: '/images/profiles/paulo.png',
+    text: 'A leitura é fácil e prática. Não vende fantasia. Me deu um roteiro para observar meu comportamento e corrigir aos poucos.',
   },
 ];
 
@@ -174,6 +177,7 @@ function ProductCoverCard({ image, title, subtitle, text, badge }) {
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showMobileCta, setShowMobileCta] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
   useEffect(() => {
@@ -184,7 +188,10 @@ export default function App() {
   }, [isMenuOpen]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 12);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 12);
+      setShowMobileCta(window.scrollY > window.innerHeight * 0.82);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -212,7 +219,7 @@ export default function App() {
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#CFA34A] text-lg font-black italic text-[#090806] shadow-[0_0_24px_rgba(207,163,74,0.4)]">M</span>
             <span className="flex flex-col">
               <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A]">Magnetus III</span>
-              <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#9b9488]">corte do antivalor</span>
+              <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#9b9488]">método de presença</span>
             </span>
           </button>
 
@@ -223,7 +230,7 @@ export default function App() {
               </button>
             ))}
             <button type="button" onClick={() => scrollToSection('oferta')} className="gold-cta rounded-sm px-6 py-3 text-[11px] font-black uppercase tracking-[0.12em] text-[#090806]">
-              Quero cortar meu antivalor
+              Quero começar hoje
             </button>
           </div>
 
@@ -240,41 +247,48 @@ export default function App() {
               </button>
             ))}
             <button type="button" onClick={() => scrollToSection('oferta')} className="gold-cta mt-5 rounded-sm px-6 py-5 text-base font-black uppercase tracking-[0.12em] text-[#090806]">
-              Quero cortar meu antivalor
+              Quero começar hoje
             </button>
           </div>
         </div>
       </nav>
 
       <main id="conteudo">
-        <section className="relative min-h-[100dvh] overflow-hidden bg-[radial-gradient(circle_at_75%_18%,rgba(207,163,74,.22),transparent_30%),radial-gradient(circle_at_90%_72%,rgba(102,57,12,.28),transparent_36%),linear-gradient(100deg,#090806_0%,#0b0906_45%,#17100a_100%)]">
-          <div className="absolute inset-0 opacity-[.08] [background-image:linear-gradient(rgba(207,163,74,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(207,163,74,.35)_1px,transparent_1px)] [background-size:64px_64px]" />
-          <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-10 px-5 pb-16 pt-28 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:pt-32">
+        <section className="relative min-h-[100svh] overflow-hidden bg-[#090806]">
+          <img
+            src="/images/hero-wide.png"
+            alt="Homem em ambiente escuro com presença séria"
+            className="absolute inset-0 h-full w-full object-cover object-[68%_center] lg:object-contain lg:object-right"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,8,6,.98)_0%,rgba(9,8,6,.9)_36%,rgba(9,8,6,.55)_66%,rgba(9,8,6,.18)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,8,6,.68)_0%,rgba(9,8,6,.08)_38%,rgba(9,8,6,.82)_100%)] md:bg-[linear-gradient(180deg,rgba(9,8,6,.18)_0%,rgba(9,8,6,.1)_52%,rgba(9,8,6,.58)_100%)]" />
+          <div className="absolute inset-0 opacity-[.07] [background-image:linear-gradient(rgba(207,163,74,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(207,163,74,.35)_1px,transparent_1px)] [background-size:64px_64px]" />
+          <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl items-center gap-8 px-5 pb-10 pt-24 md:grid-cols-[0.88fr_1.12fr] md:px-8 md:pb-8 md:pt-24 xl:pt-20">
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#CFA34A]/35 bg-[#090806]/70 px-4 py-2 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#CFA34A]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Protocolo completo + bônus Antivalor</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Método direto + bônus prático</span>
               </div>
-              <h1 className="max-w-5xl text-[43px] font-black uppercase leading-[0.93] tracking-tight text-[#f4ead8] md:text-7xl xl:text-[88px]">
-                Corte o antivalor. <span className="text-[#CFA34A]">Construa presença.</span>
+              <h1 className="max-w-5xl text-[43px] font-black uppercase leading-[0.93] tracking-tight text-[#f4ead8] md:text-[64px] xl:text-[76px] 2xl:text-[84px]">
+                Pare de parecer ansioso. <span className="text-[#CFA34A]">Construa presença.</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#cfc7b8] md:text-xl">
-                Você pode estar bem vestido, ter assunto e ainda assim comunicar ansiedade, pressa e necessidade de aprovação. O Magnetus III é um protocolo de 15 dias para corrigir sinais que reduzem seu valor percebido.
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#cfc7b8] md:text-lg xl:text-xl">
+                Você pode estar bem vestido, ter assunto e ainda assim passar pressa, insegurança e necessidade de aprovação. O Magnetus III é um método de 15 dias para ajustar os sinais que as pessoas percebem antes das suas palavras.
               </p>
-              <p className="mt-5 max-w-2xl border-l-2 border-[#CFA34A] pl-4 text-lg font-black leading-relaxed text-[#f4ead8]">
-                O homem perde valor quando tenta provar valor.
+              <p className="mt-4 max-w-2xl border border-[#CFA34A]/30 bg-[#090806]/65 p-4 text-base font-black leading-relaxed text-[#f4ead8] backdrop-blur-sm md:text-lg">
+                Quando você tenta convencer demais, passa insegurança. Quando age com calma, passa presença.
               </p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <button type="button" onClick={() => scrollToSection('oferta')} className="gold-cta group flex w-full items-center justify-center gap-3 rounded-sm px-8 py-5 text-base font-black uppercase tracking-wide text-[#090806] sm:w-auto">
-                  Quero cortar meu antivalor
+                  Quero começar hoje
                   <ArrowRight size={20} />
                 </button>
                 <button type="button" onClick={() => scrollToSection('diagnostico')} className="flex w-full items-center justify-center rounded-sm border border-[#CFA34A]/45 px-8 py-5 text-sm font-black uppercase tracking-wide text-[#CFA34A] hover:bg-[#CFA34A]/10 sm:w-auto">
                   Fazer mini diagnóstico
                 </button>
               </div>
-              <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
-                {['Acesso imediato', 'PDF prático', 'Bônus Antivalor', 'Garantia 7 dias'].map((item) => (
+              <div className="mt-6 grid max-w-2xl grid-cols-2 gap-3 md:grid-cols-4">
+                {['Acesso imediato', 'PDF prático', 'Bônus prático', 'Garantia 7 dias'].map((item) => (
                   <div key={item} className="border border-white/10 bg-white/[0.035] p-4 backdrop-blur-sm">
                     <CheckCircle2 size={16} className="mb-3 text-[#CFA34A]" />
                     <p className="text-[10px] font-black uppercase leading-tight tracking-[0.12em] text-[#d8d0c1]">{item}</p>
@@ -283,7 +297,7 @@ export default function App() {
               </div>
             </div>
 
-            <ProductComboCard />
+            <div className="hidden md:block" aria-hidden="true" />
           </div>
         </section>
 
@@ -292,8 +306,8 @@ export default function App() {
             <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Mini diagnóstico</span>
-                <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-6xl">Você está entregando antivalor quando...</h2>
-                <p className="mt-6 text-lg leading-relaxed text-[#bdb4a5]">Se você marcou mentalmente dois ou mais itens, o problema não é falta de potencial. É vazamento de valor percebido.</p>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-6xl">Você passa insegurança quando...</h2>
+                <p className="mt-6 text-lg leading-relaxed text-[#bdb4a5]">Se você se viu em dois ou mais pontos, talvez o problema não seja falta de potencial. Pode ser a forma como você está se mostrando.</p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {leakSignals.map((item) => (
@@ -305,7 +319,7 @@ export default function App() {
               </div>
             </div>
             <div className="mt-12 border border-[#CFA34A]/25 bg-[#0f0e0b] p-6 text-center md:p-8">
-              <p className="text-2xl font-black uppercase leading-tight text-[#f4ead8] md:text-4xl">O problema não é você gostar. É você perder eixo quando gosta.</p>
+              <p className="text-2xl font-black uppercase leading-tight text-[#f4ead8] md:text-4xl">O problema não é gostar. É perder a calma quando gosta.</p>
             </div>
           </div>
         </section>
@@ -314,10 +328,10 @@ export default function App() {
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-end">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">O conflito real</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">O ponto central</span>
                 <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">Não é falta de dinheiro, shape ou frase pronta. É postura emocional.</h2>
               </div>
-              <p className="max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">Antes de qualquer palavra, as pessoas leem seu ritmo, pressa, silêncio, limite e necessidade de aprovação. Quando esses sinais estão desalinhados, você pode tentar impressionar e ainda assim parecer inseguro.</p>
+              <p className="max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">Antes de qualquer palavra, as pessoas percebem seu ritmo, sua pressa, seu silêncio e seus limites. Quando esses sinais estão confusos, você pode tentar impressionar e ainda assim parecer inseguro.</p>
             </div>
 
             <div className="mt-14 grid gap-5 md:grid-cols-3">
@@ -354,9 +368,9 @@ export default function App() {
         <section className="bg-[#eee6d7] py-24 text-[#17120b]">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.05fr_0.95fr] md:items-center md:px-8">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#B8842F]">Quebra de objeção</span>
-              <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tight md:text-6xl">Custa menos que o que muitos homens compram para parecer confiantes.</h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#4c4132]">Barbershop melhora visual por alguns dias. Perfume chama atenção por segundos. O Magnetus trabalha o que sustenta tudo isso: postura, leitura emocional, comunicação e presença.</p>
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#B8842F]">Decisão simples</span>
+              <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tight md:text-6xl">Custa menos que muita coisa comprada para parecer mais confiante.</h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#4c4132]">Corte, barba e perfume ajudam no visual. Mas presença vem do que você comunica com postura, calma, voz, limite e atitude.</p>
             </div>
             <div className="border border-[#B8842F]/25 bg-[#fbf6ea] p-5 shadow-[0_30px_80px_rgba(23,18,11,0.12)] md:p-8">
               <div className="mb-6 flex items-center justify-between border-b border-[#B8842F]/20 pb-5">
@@ -378,12 +392,12 @@ export default function App() {
             <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">O que você recebe</span>
-                <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Diagnóstico para cortar. Protocolo para construir.</h2>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#bdb4a5]">O combo une o Magnetus III ao Antídoto do Antivalor. Um material mostra o que enfraquece sua presença, o outro organiza práticas para reconstruir eixo por repetição.</p>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Entenda seus sinais. Treine novas respostas.</h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#bdb4a5]">O combo une o Magnetus III ao Antídoto do Antivalor. Um material mostra o que enfraquece sua presença, o outro traz práticas para você repetir e melhorar com consistência.</p>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                <ProductCoverCard image={productImages.magnetus} title="Magnetus III" subtitle="Protocolo de presença" badge="15 dias" text="Postura, voz, silêncio, limite e autocontrole para comunicar valor sem precisar provar valor." />
-                <ProductCoverCard image={productImages.antidoto} title="Antídoto do Antivalor" subtitle="Bônus estratégico" badge="bônus" text="Mapa dos sinais invisíveis de pressa, carência e reatividade que reduzem seu valor percebido." />
+                <ProductCoverCard image={productImages.magnetus} title="Magnetus III" subtitle="Método de presença" badge="15 dias" text="Postura, voz, silêncio, limite e autocontrole para passar mais firmeza sem tentar se provar o tempo todo." />
+                <ProductCoverCard image={productImages.antidoto} title="Antídoto do Antivalor" subtitle="Bônus estratégico" badge="bônus" text="Mapa dos sinais de pressa, carência e reação impulsiva que podem diminuir sua presença." />
               </div>
             </div>
 
@@ -403,7 +417,7 @@ export default function App() {
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="max-w-4xl">
               <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">O que muda na prática</span>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Você não muda virando outra pessoa. Muda parando de se abandonar.</h2>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Você não precisa virar outra pessoa. Precisa parar de agir contra você.</h2>
             </div>
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               {beforeAfter.map(([title, text]) => (
@@ -422,8 +436,8 @@ export default function App() {
             <h2 className="mt-4 text-4xl font-black uppercase tracking-tight text-[#f4ead8] md:text-6xl">Sol Lima</h2>
             <div className="mt-7 max-w-3xl space-y-5 text-base leading-relaxed text-[#bdb4a5] md:text-lg">
               <p className="text-xl font-bold text-[#f4ead8]">Eu estudo presença, magnetismo e os sinais que mudam a forma como uma pessoa é percebida.</p>
-              <p>O Magnetus nasceu da observação de homens capazes que perdiam força social por detalhes de postura, fala, urgência emocional e falta de eixo.</p>
-              <p>Meu trabalho é traduzir comportamento, comunicação e autoimagem em práticas aplicáveis, sem vender manipulação e sem prometer controle sobre outras pessoas.</p>
+              <p>O Magnetus nasceu ao observar homens capazes que perdiam força social por postura, fala acelerada, urgência emocional e falta de limite.</p>
+              <p>Meu trabalho é transformar comportamento, comunicação e autoimagem em práticas simples, sem manipulação e sem prometer controle sobre outras pessoas.</p>
             </div>
             <blockquote className="mt-8 border border-[#CFA34A]/25 bg-[#090806] p-6 text-lg font-bold italic leading-relaxed text-[#f4ead8]">"Presença não é ser notado. É não se perder tentando ser escolhido."</blockquote>
           </div>
@@ -432,16 +446,22 @@ export default function App() {
         <section className="bg-[#0f0e0b] py-24">
           <div className="mx-auto max-w-6xl px-5 md:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Prova social</span>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">O que homens percebem ao aplicar</h2>
-              <div className="mt-6 flex items-center justify-center gap-2">{[1,2,3,4,5].map((i) => <Star key={i} size={18} className="fill-[#CFA34A] text-[#CFA34A]" />)}<span className="ml-2 text-sm text-[#aaa194]">Relatos e padrões observados</span></div>
+              <span className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Avaliações</span>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">O que homens perceberam ao aplicar</h2>
+              <div className="mt-6 flex items-center justify-center gap-2">{[1,2,3,4,5].map((i) => <Star key={i} size={18} className="fill-[#CFA34A] text-[#CFA34A]" />)}<span className="ml-2 text-sm text-[#aaa194]">Relatos de clientes</span></div>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {testimonials.map((testimonial) => (
                 <article key={testimonial.name} className="relative border border-white/10 bg-[#090806] p-6">
                   <MessageSquareQuote size={24} className="absolute right-5 top-5 text-[#CFA34A]/35" />
-                  <p className="min-h-[120px] text-sm italic leading-relaxed text-[#d8d0c1]">"{testimonial.text}"</p>
-                  <div className="mt-6 border-t border-white/10 pt-4"><p className="text-sm font-black text-[#f4ead8]">{testimonial.name}</p><p className="mt-1 text-xs text-[#7e7568]">{testimonial.age}</p></div>
+                  <p className="min-h-[120px] pr-8 text-sm italic leading-relaxed text-[#d8d0c1]">"{testimonial.text}"</p>
+                  <div className="mt-6 flex items-center gap-4 border-t border-white/10 pt-4">
+                    <img src={testimonial.avatar} alt={`Foto de ${testimonial.name}`} className="h-12 w-12 rounded-full border border-[#CFA34A]/35 object-cover object-top" loading="lazy" />
+                    <div>
+                      <p className="text-sm font-black text-[#f4ead8]">{testimonial.name}</p>
+                      <p className="mt-1 text-xs text-[#7e7568]">{testimonial.age}</p>
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -458,14 +478,14 @@ export default function App() {
                 <div>
                   <div className="mb-6 inline-flex bg-[#CFA34A] px-5 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#090806]">Lote promocional disponível</div>
                   <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-[#f4ead8] md:text-6xl">Acesso completo ao Magnetus III</h2>
-                  <p className="mt-5 text-base font-bold leading-relaxed text-[#d8d0c1]">Para cortar sinais de antivalor e construir presença masculina com postura, voz, silêncio, limite e autocontrole.</p>
+                  <p className="mt-5 text-base font-bold leading-relaxed text-[#d8d0c1]">Para diminuir sinais de insegurança e construir presença com postura, voz, silêncio, limite e autocontrole.</p>
                   <div className="mt-7 space-y-3">
                     {receiveStack.map((row) => (
                       <div key={row.item} className="flex items-start justify-between gap-4 border-b border-white/10 pb-3"><div className="flex gap-3"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#CFA34A]" /><span className="text-sm leading-relaxed text-[#d8d0c1]">{row.item}</span></div><span className="shrink-0 text-sm font-bold text-[#7e7568] line-through">{row.value}</span></div>
                     ))}
                   </div>
                   <div className="mt-8"><p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Hoje por apenas</p><p className="mt-1 text-6xl font-black tracking-tight text-[#CFA34A] md:text-8xl">R$ 79,90</p><p className="mt-2 text-sm font-bold text-[#aaa194]">ou 6x de R$ 13,32 no cartão</p></div>
-                  <button type="button" onClick={handleCheckout} className="gold-cta group mt-8 flex w-full items-center justify-center gap-3 rounded-sm px-8 py-6 text-lg font-black uppercase tracking-wide text-[#090806]">Quero cortar meu antivalor <ArrowRight size={22} /></button>
+                  <button type="button" onClick={handleCheckout} className="gold-cta group mt-8 flex w-full items-center justify-center gap-3 rounded-sm px-8 py-6 text-lg font-black uppercase tracking-wide text-[#090806]">Quero começar hoje <ArrowRight size={22} /></button>
                   <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-[#8f8678]"><Lock size={13} /> Pagamento seguro via Kiwify. Acesso enviado por e-mail.</p>
                 </div>
               </div>
@@ -496,9 +516,11 @@ export default function App() {
         <p className="mx-auto mt-8 max-w-4xl px-5 text-center text-[10px] leading-relaxed text-[#686054]">Magnetus III &copy; {new Date().getFullYear()} Sollima Studio. Este produto não garante resultados específicos. Resultados variam conforme aplicação individual.</p>
       </footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-[#CFA34A]/30 bg-[#090806]/96 px-4 py-3 backdrop-blur-md md:hidden">
-        <button type="button" onClick={handleCheckout} className="gold-cta flex w-full items-center justify-center gap-2 rounded-sm px-5 py-4 text-sm font-black uppercase tracking-wide text-[#090806]">Cortar antivalor - R$ 79,90 <ArrowRight size={18} /></button>
-      </div>
+      {showMobileCta && (
+        <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-[#CFA34A]/30 bg-[#090806]/96 px-4 py-3 backdrop-blur-md md:hidden">
+          <button type="button" onClick={handleCheckout} className="gold-cta flex w-full items-center justify-center gap-2 rounded-sm px-5 py-4 text-sm font-black uppercase tracking-wide text-[#090806]">Começar hoje - R$ 79,90 <ArrowRight size={18} /></button>
+        </div>
+      )}
     </div>
   );
 }
