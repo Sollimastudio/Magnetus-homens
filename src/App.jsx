@@ -255,12 +255,16 @@ function MobileScrollSequence({ onCheckout }) {
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,4,.48)_0%,rgba(7,6,4,.08)_42%,rgba(7,6,4,.82)_100%)]" />
         <div
-          className="absolute left-5 right-5 top-24 border border-[#CFA34A]/35 bg-[#070604]/74 p-5 backdrop-blur-md"
-          style={{ opacity: captionOpacity, transform: `translateY(${progress * -24}px)` }}
+          className="absolute left-6 right-6 top-28"
+          style={{
+            opacity: captionOpacity,
+            textShadow: '0 3px 18px rgba(0,0,0,.82), 0 1px 2px rgba(0,0,0,.92)',
+            transform: `translateY(${progress * -24}px)`,
+          }}
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Arraste para ver a mudança</p>
-          <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-tight text-[#f4ead8]">
-            Quando sua presença muda, a resposta muda junto.
+          <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#CFA34A]">Magnetus III</p>
+          <h2 className="mt-3 max-w-[13ch] text-4xl font-black uppercase leading-[0.9] tracking-tight text-[#f4ead8]">
+            Presença não se explica. Ela aparece.
           </h2>
         </div>
         {progress > 0.76 && (
@@ -378,7 +382,9 @@ export default function App() {
       </nav>
 
       <main id="conteudo">
-        <section className="relative min-h-[100svh] overflow-hidden bg-[#090806]">
+        <MobileScrollSequence onCheckout={handleCheckout} />
+
+        <section className="relative hidden min-h-[100svh] overflow-hidden bg-[#090806] md:block">
           <img
             src="/images/hero-wide.png"
             alt="Homem em ambiente escuro com presença séria"
@@ -591,8 +597,6 @@ export default function App() {
             </div>
           </div>
         </section>
-
-        <MobileScrollSequence onCheckout={handleCheckout} />
 
         <section id="oferta" className="bg-[#090806] py-24">
           <div className="mx-auto max-w-6xl px-5 md:px-8">
