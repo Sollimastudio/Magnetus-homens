@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   Brain,
@@ -17,8 +17,12 @@ import {
 const productImages = {
   magnetus: '/images/ebook-magnetus-3.jpeg',
   antidoto: '/images/bonus-antidoto.jpeg',
-  combo: '/images/combo-magnetus-masculino-original.jpeg',
+  combo: '/images/combo-atual.png',
 };
+
+const mobileSequenceFrameCount = 192;
+
+const getMobileSequenceFrame = (index) => `/images/mobile-scroll-sequence/frame_${String(index).padStart(4, '0')}.jpg`;
 
 const navItems = [
   { label: 'Diagnóstico', id: 'diagnostico' },
@@ -174,6 +178,116 @@ function ProductCoverCard({ image, title, subtitle, text, badge }) {
   );
 }
 
+function MobileScrollSequence({ onCheckout }) {
+  const sectionRef = useRef(null);
+  const preloadedFramesRef = useRef([]);
+  const [frameIndex, setFrameIndex] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [pinState, setPinState] = useState('before');
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) return;
+
+    const preloadedFrames = [];
+    for (let index = 1; index <= mobileSequenceFrameCount; index += 1) {
+      const image = new Image();
+      image.src = getMobileSequenceFrame(index);
+      preloadedFrames.push(image);
+    }
+    preloadedFramesRef.current = preloadedFrames;
+  }, []);
+
+  useEffect(() => {
+    let rafId = null;
+
+    const updateFrame = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const scrollable = Math.max(1, rect.height - window.innerHeight);
+      const nextProgress = Math.min(1, Math.max(0, -rect.top / scrollable));
+      const nextPinState = rect.top > 0 ? 'before' : rect.bottom < window.innerHeight ? 'after' : 'active';
+      const nextFrame = Math.min(
+        mobileSequenceFrameCount,
+        Math.max(1, Math.round(nextProgress * (mobileSequenceFrameCount - 1)) + 1),
+      );
+
+      setProgress(nextProgress);
+      setPinState(nextPinState);
+      setFrameIndex(nextFrame);
+    };
+
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        updateFrame();
+        rafId = null;
+      });
+    };
+
+    updateFrame();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  const captionOpacity = Math.max(0, 1 - progress / 0.32);
+  const ctaProgress = Math.min(1, Math.max(0, (progress - 0.76) / 0.18));
+  const frameStageClass = {
+    before: 'absolute inset-x-0 top-0',
+    active: 'fixed inset-0 z-[80]',
+    after: 'absolute inset-x-0 bottom-0',
+  }[pinState];
+
+  return (
+    <section id="mobile-scroll-offer" ref={sectionRef} className="relative h-[430svh] bg-[#070604] md:hidden">
+      <div className={`${frameStageClass} h-[100svh] overflow-hidden bg-[#070604]`}>
+        <img
+          src={getMobileSequenceFrame(frameIndex)}
+          alt="Homem confiante recebendo mensagens no celular"
+          className="h-full w-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,6,4,.48)_0%,rgba(7,6,4,.08)_42%,rgba(7,6,4,.82)_100%)]" />
+        <div
+          className="absolute left-5 right-5 top-24 border border-[#CFA34A]/35 bg-[#070604]/74 p-5 backdrop-blur-md"
+          style={{ opacity: captionOpacity, transform: `translateY(${progress * -24}px)` }}
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#CFA34A]">Arraste para ver a mudança</p>
+          <h2 className="mt-3 text-3xl font-black uppercase leading-[0.92] tracking-tight text-[#f4ead8]">
+            Quando sua presença muda, a resposta muda junto.
+          </h2>
+        </div>
+        {progress > 0.76 && (
+          <div
+            className="absolute inset-x-5 bottom-7"
+            style={{
+              opacity: ctaProgress,
+              transform: `translateY(${(1 - ctaProgress) * 28}px)`,
+              pointerEvents: ctaProgress > 0.85 ? 'auto' : 'none',
+            }}
+          >
+            <div className="border border-[#CFA34A]/35 bg-[#070604]/82 p-4 backdrop-blur-md">
+              <p className="mb-4 text-center text-sm font-bold leading-relaxed text-[#f4ead8]">
+                O método completo está pronto para acessar agora.
+              </p>
+              <button type="button" onClick={onCheckout} className="gold-cta flex w-full items-center justify-center gap-3 rounded-sm px-6 py-5 text-sm font-black uppercase tracking-wide text-[#090806]">
+                Começar hoje - R$ 79,90
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -190,6 +304,12 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 12);
+      const mobileSequence = document.getElementById('mobile-scroll-offer');
+      if (mobileSequence) {
+        const showAfterSequence = window.scrollY > mobileSequence.offsetTop + mobileSequence.offsetHeight - window.innerHeight * 0.2;
+        setShowMobileCta(showAfterSequence);
+        return;
+      }
       setShowMobileCta(window.scrollY > window.innerHeight * 0.82);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -216,7 +336,11 @@ export default function App() {
       <nav className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${scrolled ? 'border-b border-[#CFA34A]/25 bg-[#090806]/95 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.38)] backdrop-blur-xl' : 'bg-[#090806]/85 py-4 backdrop-blur-xl'}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8">
           <button type="button" onClick={() => scrollToSection('conteudo')} className="flex items-center gap-3 text-left">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#CFA34A] text-lg font-black italic text-[#090806] shadow-[0_0_24px_rgba(207,163,74,0.4)]">M</span>
+            <img
+              src="/images/logo-favicon.png"
+              alt="Magnetus III"
+              className="h-11 w-11 shrink-0 rounded-sm object-cover shadow-[0_0_24px_rgba(207,163,74,0.4)]"
+            />
             <span className="flex flex-col">
               <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A]">Magnetus III</span>
               <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#9b9488]">método de presença</span>
@@ -467,6 +591,8 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <MobileScrollSequence onCheckout={handleCheckout} />
 
         <section id="oferta" className="bg-[#090806] py-24">
           <div className="mx-auto max-w-6xl px-5 md:px-8">
