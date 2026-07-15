@@ -13,6 +13,7 @@ Implementada na landing page em 14 de julho de 2026.
 - criada uma Central de Suporte para acesso, reembolso e privacidade;
 - Termos de Uso e Política de Privacidade revisados;
 - rodapé atualizado com suporte e responsabilidade editorial.
+- WhatsApp oficial de suporte `(62) 99187-9936` publicado na landing, na Central de Suporte, nos Termos e na Política de Privacidade, mantendo o e-mail como canal formal.
 
 ## Critério aplicado às credenciais
 

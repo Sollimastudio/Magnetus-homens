@@ -65,5 +65,9 @@ for (const href of ['/suporte.html', '/politica-de-privacidade.html', '/termos-d
   assert.ok(app.includes(`href="${href}"`), `Link legal ou de suporte ausente: ${href}`);
 }
 
+for (const [surface, source] of Object.entries({ app, terms, privacy, support })) {
+  assert.ok(source.includes('https://wa.me/5562991879936'), `WhatsApp oficial ausente em ${surface}.`);
+}
+
 console.log(`Oferta: ${PRODUCT.canonicalName} · ${PRODUCT.priceLabel} · ${PRODUCT.bonusName} · ${PRODUCT.guaranteeDays} dias.`);
 console.log('CTAs de checkout, links rastreados, superfícies legais e metadados sociais: consistentes.');

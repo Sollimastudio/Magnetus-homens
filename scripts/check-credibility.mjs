@@ -28,6 +28,7 @@ for (const phrase of [
   'criadora e responsável editorial',
   'depoimentos só serão publicados quando houver origem e autorização de uso registradas',
   'https://reembolso.kiwify.com.br/',
+  'https://wa.me/5562991879936',
   'contato@sollimastudio.com',
   'sol lima',
   'sollima studio',
