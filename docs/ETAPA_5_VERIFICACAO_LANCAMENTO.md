@@ -66,7 +66,7 @@ Validação local aprovada:
 
 Arquivo: `public/images/optimized/og-magnetus.jpg`.
 
-O preview real do WhatsApp deve ser conferido depois do deploy, porque a produção ainda serve os metadados antigos e o cache do WhatsApp só pode ser avaliado na URL pública final.
+Os metadados e a imagem social já estão publicados na URL final. O card deve ser conferido em uma conversa real do WhatsApp; se o aplicativo ainda mostrar a versão anterior, aguardar a renovação do cache de compartilhamento.
 
 ## Build e consistência
 
@@ -91,15 +91,14 @@ As páginas `/suporte.html`, `/politica-de-privacidade.html` e `/termos-de-uso.h
 
 ## Estado atual da produção
 
-A integração da Vercel confirmou que `https://magnetus-homens.vercel.app/` responde HTTP 200, mas ainda entrega a versão anterior:
+A versão foi publicada em 15/07/2026 no commit GitHub `10f85afd8a9c470888d716cfd626d4a2f75169e6` e no deployment Vercel `dpl_3fxRLEKwXnuicSnW4sb4AYHWfpn4`.
 
-- título antigo “Magnetus III — Método de Presença Masculina”;
-- Open Graph antigo com imagem relativa;
-- `/suporte.html` ainda retorna 404;
-- a nova imagem `/images/optimized/og-magnetus.jpg` ainda retorna 404;
-- Termos e Privacidade ainda são versões anteriores.
-
-Esse estado é esperado porque nenhuma alteração desta auditoria foi publicada.
+- `https://magnetus-homens.vercel.app/`: HTTP 200 e título oficial;
+- `/suporte.html`, `/politica-de-privacidade.html` e `/termos-de-uso.html`: HTTP 200;
+- `/images/optimized/og-magnetus.jpg`: HTTP 200, `image/jpeg`, 65.882 bytes;
+- `/api/funnel-event`: evento de verificação aceito com HTTP 204;
+- logs de runtime: evento `cta_click` registrado com posição, produto e origem;
+- erros de runtime: nenhum encontrado após o deployment.
 
 ## Verificações externas de acompanhamento
 
