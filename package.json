@@ -6,7 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "communication:check": "node scripts/check-communication-consistency.mjs",
+    "credibility:check": "node scripts/check-credibility.mjs",
+    "experiment:sample": "node scripts/calculate-experiment-sample.mjs",
+    "experiments:check": "node scripts/check-experiments.mjs",
     "lint": "eslint .",
+    "performance:budget": "node scripts/check-performance-budget.mjs",
+    "release:check": "node scripts/check-release-consistency.mjs",
+    "test": "node --test src/lib/*.test.js api/*.test.js",
+    "verify:release": "npm test && npm run lint && npm run communication:check && npm run credibility:check && npm run experiments:check && npm run performance:budget && npm run release:check && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

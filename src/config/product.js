@@ -1,0 +1,15 @@
+export const PRODUCT = Object.freeze({
+  id: 'magnetus_iii',
+  name: 'Magnetus III',
+  subtitle: 'Protocolo de Presença Masculina em 15 Dias',
+  canonicalName: 'Magnetus III — Protocolo de Presença Masculina em 15 Dias',
+  promise: 'Ajuste os sinais de pressa e insegurança para construir uma presença mais firme em 15 dias.',
+  format: '2 materiais digitais em PDF',
+  bonusName: 'Antídoto do Antivalor',
+  guaranteeDays: 7,
+  checkoutUrl: 'https://pay.kiwify.com.br/TX2Ao2R',
+  price: 79.9,
+  priceLabel: 'R$ 79,90',
+  installmentLabel: '6x de R$ 13,32',
+  currency: 'BRL',
+});
