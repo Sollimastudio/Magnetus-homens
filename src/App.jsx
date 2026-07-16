@@ -41,82 +41,82 @@ const navItems = [
 ];
 
 const leakSignals = [
-  'Responde rápido demais com medo de perder a pessoa.',
-  'Explica tudo em excesso para tentar parecer interessante.',
-  'Insiste quando o melhor seria observar e esperar.',
-  'Tenta impressionar antes de criar respeito.',
-  'Confunde intensidade com presença.',
-  'Aceita pouco e chama isso de estratégia.',
+  'Responde rápido demais e transforma interesse em urgência.',
+  'Explica tudo em excesso para tentar parecer mais valioso.',
+  'Fica disponível demais e transmite falta de limite.',
+  'Tenta impressionar antes de gerar respeito e presença.',
+  'Confunde intensidade, ansiedade e insistência com atração.',
+  'Aceita sinais fracos e chama isso de estratégia.',
 ];
 
 const symptoms = [
   {
     icon: <EyeOff size={28} />,
     title: 'Disponível demais',
-    text: 'Quando você está sempre pronto para tudo, passa a sensação de que não tem limite.',
+    text: 'Quando você aparece pronto para tudo o tempo inteiro, sua postura perde força e seu valor percebido diminui.',
   },
   {
     icon: <Brain size={28} />,
-    title: 'No modo ansiedade',
-    text: 'Você responde, explica e insiste para aliviar a própria tensão, não para se comunicar melhor.',
+    title: 'Ansiedade visível',
+    text: 'Responder, insistir e explicar demais costuma aliviar sua tensão, mas transmite insegurança na leitura do outro.',
   },
   {
     icon: <Target size={28} />,
-    title: 'Tentando se provar',
-    text: 'Quanto mais você tenta convencer, mais insegurança aparece. Calma, postura e limite falam primeiro.',
+    title: 'Valor tentando se provar',
+    text: 'Quanto mais você tenta convencer, mais sua comunicação perde calma, presença masculina e firmeza.',
   },
 ];
 
 const mechanismFlow = [
   {
-    label: '1. Sinal emitido',
-    title: 'Pressa e excesso',
-    text: 'Responder no impulso, explicar demais e ficar disponível sem critério.',
+    label: '1. Você transmite',
+    title: 'Pressa, excesso e reatividade',
+    text: 'Ritmo acelerado, explicação em excesso e disponibilidade sem critério costumam enfraquecer sua imagem.',
   },
   {
-    label: '2. Leitura percebida',
-    title: 'Insegurança',
-    text: 'Mesmo com boa intenção, o ritmo comunica necessidade de aprovação e falta de eixo.',
+    label: '2. O outro lê',
+    title: 'Insegurança e necessidade de aprovação',
+    text: 'Mesmo com boa intenção, o que chega é ansiedade, falta de eixo e pouco controle emocional.',
   },
   {
-    label: '3. Ajuste treinado',
-    title: 'Presença',
-    text: 'Pausa, postura, voz, silêncio e limite tornam a comunicação mais firme e coerente.',
+    label: '3. Você ajusta',
+    title: 'Presença, postura e confiança',
+    text: 'Pausa, voz, olhar, silêncio, limite e coerência mudam a forma como sua presença masculina é percebida.',
   },
 ];
 
 const fitList = [
-  'Homens que querem parar de agir buscando aprovação.',
-  'Homens que querem diminuir carência, pressa e excesso de explicação.',
-  'Homens que querem mais presença na postura, na fala e nas atitudes.',
-  'Homens que preferem um passo a passo direto, sem fantasia de guru alfa.',
+  'Homens que querem desenvolver presença masculina sem parecer ansiosos, carentes ou inseguros.',
+  'Homens que querem melhorar postura, comunicação, leitura social e valor percebido.',
+  'Homens que querem se comunicar melhor no digital e no presencial.',
+  'Homens que preferem um passo a passo direto, sem fantasia de guru alfa e sem manipulação.',
 ];
 
 const notFitList = [
-  'Quem procura manipulação ou promessa de conquista garantida.',
-  'Quem quer controlar outra pessoa em vez de reconstruir o próprio eixo.',
-  'Quem espera resultado sem leitura, prática e auto-observação diária.',
-  'Quem precisa de substituto para terapia ou tratamento psicológico.',
+  'Quem procura manipulação, promessa de conquista garantida ou atalho para controlar outras pessoas.',
+  'Quem quer parecer confiante sem fazer leitura, prática e auto-observação.',
+  'Quem busca um substituto para terapia, diagnóstico ou tratamento psicológico.',
+  'Quem não está disposto a ajustar postura, ritmo, comunicação e limites na vida real.',
 ];
 
 const protocolSteps = [
   {
     phase: 'Dias 1-5',
-    title: 'Diagnóstico dos sinais',
-    text: 'Identificar pressa, excesso de explicação, disponibilidade sem critério e busca de aprovação.',
-    topics: ['Impulso', 'Explicação excessiva', 'Disponibilidade', 'Aprovação'],
+    title: 'Diagnóstico da insegurança percebida',
+    text: 'Identificar os comportamentos que reduzem sua presença masculina: pressa, excesso de explicação, carência e disponibilidade sem critério.',
+    topics: ['Impulso e ansiedade', 'Excesso de explicação', 'Disponibilidade demais', 'Busca de aprovação'],
   },
   {
     phase: 'Dias 6-10',
-    title: 'Ajuste de presença',
-    text: 'Treinar postura, voz, olhar, silêncio, limite e pequenas decisões que passam mais firmeza.',
-    topics: ['Postura', 'Voz e olhar', 'Silêncio', 'Limites'],
+    title: 'Presença, postura e comunicação',
+    text: 'Treinar postura, voz, olhar, silêncio, limite e pequenas decisões que aumentam confiança, calma e firmeza.',
+    topics: ['Postura masculina', 'Voz e olhar', 'Silêncio e ritmo', 'Limites claros'],
   },
   {
     phase: 'Dias 11-15',
-    title: 'Aplicação na vida real',
-    text: 'Usar em conversas, encontros, trabalho e redes sociais sem transformar interesse em urgência.',
-    topics: ['Conversas', 'Encontros', 'Trabalho', 'Redes sociais'],
+    title: 'Aplicação no digital e no presencial',
+    text: 'Aplicar os ajustes em conversas, encontros, redes sociais, trabalho e situações em que sua presença precisa falar antes da explicação.',
+    topics: ['Conversas', 'Encontros', 'Redes sociais', 'Vida real'],
   },
 ];
 
@@ -125,13 +125,13 @@ const deliverables = [
     icon: <BookOpen size={24} />,
     label: 'Material principal • PDF',
     title: PRODUCT.canonicalName,
-    text: 'Estrutura prática em três fases para reconhecer sinais de insegurança, ajustar respostas e aplicar novas condutas.',
+    text: 'Guia prático para desenvolver presença masculina, confiança, postura e comunicação em 15 dias.',
   },
   {
     icon: <FileCheck2 size={24} />,
     label: 'Material complementar • PDF',
     title: PRODUCT.bonusName,
-    text: 'Mapa complementar para identificar pressa, carência e reatividade que enfraquecem a presença.',
+    text: 'Mapa complementar para identificar pressa, carência, reatividade e sinais que enfraquecem seu valor percebido.',
   },
 ];
 
@@ -139,8 +139,28 @@ const offerItems = [
   PRODUCT.canonicalName,
   `${PRODUCT.bonusName} — material complementar em PDF`,
   'Roteiro de aplicação organizado em 15 dias',
+  'Foco em presença masculina, confiança, postura e comunicação',
   'Acesso digital enviado por e-mail após a confirmação do pagamento',
   `Garantia de ${PRODUCT.guaranteeDays} dias processada pela Kiwify`,
+];
+
+const searchIntentTopics = [
+  {
+    title: 'O que é presença masculina?',
+    text: 'É a combinação de postura, ritmo, voz, silêncio, limites e coerência emocional. Antes da explicação, as pessoas percebem o que sua presença transmite.',
+  },
+  {
+    title: 'Como parecer menos inseguro?',
+    text: 'Você parece menos inseguro quando diminui a pressa, evita excesso de explicação, respeita o próprio tempo e sustenta uma comunicação mais calma e firme.',
+  },
+  {
+    title: 'Como melhorar postura e comunicação com mulheres?',
+    text: 'Melhorar postura e comunicação passa por presença, leitura social, controle do impulso, limite e clareza. Não é sobre personagem, é sobre eixo.',
+  },
+  {
+    title: 'Isso ajuda no online?',
+    text: 'Sim. Presença masculina também é lida no online: timing, texto, disponibilidade, insistência, silêncio e consistência influenciam muito a atração.',
+  },
 ];
 
 const faqs = [
@@ -148,7 +168,10 @@ const faqs = [
   ['O que está incluído?', `${PRODUCT.canonicalName}, o material complementar ${PRODUCT.bonusName} e o roteiro de aplicação organizado em 15 dias.`],
   ['É vídeo ou PDF?', `${PRODUCT.format}, otimizados para celular, tablet e computador.`],
   ['Qual é a proposta?', `${PRODUCT.promise} O resultado depende da leitura, da prática e da auto-observação de cada pessoa.`],
-  ['Serve para reconquistar alguém?', 'Não é sobre manipular ninguém. É sobre reconstruir eixo, postura e presença.'],
+  ['Serve para melhorar minha presença masculina?', 'Sim. A proposta do material é desenvolver presença masculina, postura, comunicação e confiança de forma prática e observável.'],
+  ['Ajuda a parecer menos inseguro?', 'Ajuda a identificar e ajustar sinais que costumam transmitir ansiedade, carência, pressa e necessidade de aprovação.'],
+  ['Serve para conversa, encontro e redes sociais?', 'Sim. O protocolo foi organizado para aplicação no digital e no presencial, incluindo conversas, redes sociais, encontros e rotina social.'],
+  ['É manipulação?', 'Não. Não é sobre manipular ninguém. É sobre reconstruir eixo, postura, leitura social e comunicação com mais presença.'],
   ['Quanto tempo preciso por dia?', 'Reserve de 10 a 20 minutos para leitura, observação e execução dos exercícios.'],
   ['Posso pedir reembolso?', `Sim. Você pode solicitar o reembolso dentro de ${PRODUCT.guaranteeDays} dias pela Kiwify.`],
 ];
@@ -162,11 +185,11 @@ export default function App() {
   const menuButtonRef = useRef(null);
   const firstMenuItemRef = useRef(null);
   const experimentValues = experiment?.values ?? {};
-  const headlineLead = experimentValues.headlineLead ?? 'Ajuste os sinais de insegurança.';
-  const headlineAccent = experimentValues.headlineAccent ?? 'Construa presença.';
-  const checkoutCtaLabel = experimentValues.checkoutCtaLabel ?? 'Acessar o protocolo';
+  const headlineLead = experimentValues.headlineLead ?? 'Desenvolva presença masculina.';
+  const headlineAccent = experimentValues.headlineAccent ?? 'Construa confiança e postura.';
+  const checkoutCtaLabel = experimentValues.checkoutCtaLabel ?? 'Construir minha presença';
   const heroSectionCtaLabel = experimentValues.heroSectionCtaLabel ?? 'Ver oferta completa';
-  const stickyCtaLabel = experimentValues.stickyCtaLabel ?? 'Acessar protocolo';
+  const stickyCtaLabel = experimentValues.stickyCtaLabel ?? 'Construir minha presença';
   const heroMedia = experimentValues.heroMedia ?? 'static';
 
   useEffect(() => {
@@ -220,7 +243,7 @@ export default function App() {
 
   useEffect(() => {
     initializeFunnelAnalytics(getExperimentAnalyticsContext(experiment));
-    return observeFunnelSections(['diagnostico', 'mecanismo', 'conteudo-protocolo', 'prova', 'garantia', 'oferta']);
+    return observeFunnelSections(['diagnostico', 'mecanismo', 'conteudo-protocolo', 'busca', 'prova', 'garantia', 'oferta']);
   }, [experiment]);
 
   const scrollToSection = (id) => {
@@ -350,11 +373,11 @@ export default function App() {
               <h1 className="max-w-5xl text-[clamp(2.25rem,10vw,3rem)] font-black uppercase leading-[0.92] tracking-tight text-[#f4ead8] md:text-[64px] xl:text-[76px] 2xl:text-[84px]">
                 {headlineLead} <span className="text-[#CFA34A]">{headlineAccent}</span>
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#ded6c8] md:mt-5 md:text-lg xl:text-xl">
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-[#ded6c8] md:mt-5 md:text-lg xl:text-xl">
                 {PRODUCT.promise}
               </p>
-              <p className="mt-4 hidden max-w-2xl border border-[#CFA34A]/30 bg-[#090806]/65 p-4 text-base font-black leading-relaxed text-[#f4ead8] backdrop-blur-sm md:block md:text-lg">
-                Um roteiro de prática e auto-observação — sem manipulação, sem promessa de conquista e sem personagem de “guru alfa”.
+              <p className="mt-4 hidden max-w-3xl border border-[#CFA34A]/30 bg-[#090806]/65 p-4 text-base font-black leading-relaxed text-[#f4ead8] backdrop-blur-sm md:block md:text-lg">
+                Um protocolo prático para melhorar presença masculina, postura, comunicação e leitura social — sem manipulação, sem promessa de conquista e sem personagem de “guru alfa”.
               </p>
               <div className="mt-4 flex items-center justify-between border-y border-[#CFA34A]/25 bg-[#090806]/68 px-4 py-3 backdrop-blur-sm md:hidden">
                 <div>
@@ -369,7 +392,7 @@ export default function App() {
                   <ArrowRight size={20} />
                 </button>
                 <button type="button" onClick={() => handleTrackedSectionNavigation('diagnostico', 'hero_mobile_diagnostico')} className="mt-3 min-h-11 w-full text-sm font-black uppercase tracking-wide text-[#CFA34A]">
-                  Ver se o protocolo é para mim
+                  Fazer mini diagnóstico
                 </button>
               </div>
               <div className="mt-6 hidden flex-col gap-3 sm:flex-row md:flex">
@@ -381,7 +404,7 @@ export default function App() {
                   Fazer mini diagnóstico
                 </button>
               </div>
-              <div className="mt-6 hidden max-w-2xl grid-cols-2 gap-3 md:grid md:grid-cols-4">
+              <div className="mt-6 hidden max-w-3xl grid-cols-2 gap-3 md:grid md:grid-cols-4">
                 {['Acesso imediato', PRODUCT.format, 'Roteiro de 15 dias', `${PRODUCT.guaranteeDays} dias de garantia`].map((item) => (
                   <div key={item} className="border border-white/10 bg-white/[0.035] p-4 backdrop-blur-sm">
                     <CheckCircle2 size={16} className="mb-3 text-[#CFA34A]" />
@@ -400,8 +423,8 @@ export default function App() {
             <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
               <div>
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Mini diagnóstico</span>
-                <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-6xl">Você passa insegurança quando...</h2>
-                <p className="mt-6 text-lg leading-relaxed text-[#bdb4a5]">Se você se viu em dois ou mais pontos, talvez o problema não seja falta de potencial. Pode ser a forma como você está se mostrando.</p>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-6xl">Sinais de insegurança que enfraquecem sua presença masculina</h2>
+                <p className="mt-6 text-lg leading-relaxed text-[#bdb4a5]">Se você se reconhece em dois ou mais pontos, talvez o problema não seja falta de potencial. Pode ser a forma como sua postura, sua comunicação e seu ritmo estão sendo lidos.</p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {leakSignals.map((item) => (
@@ -413,7 +436,7 @@ export default function App() {
               </div>
             </div>
             <div className="mt-12 border border-[#CFA34A]/25 bg-[#0f0e0b] p-6 text-center md:p-8">
-              <p className="text-2xl font-black uppercase leading-tight text-[#f4ead8] md:text-4xl">O problema não é gostar. É perder a calma quando gosta.</p>
+              <p className="text-2xl font-black uppercase leading-tight text-[#f4ead8] md:text-4xl">O problema não é gostar. É transmitir ansiedade, pressa e falta de eixo quando gosta.</p>
             </div>
           </div>
         </section>
@@ -422,10 +445,10 @@ export default function App() {
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-end">
               <div>
-                <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">O mecanismo dos sinais</span>
-                <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">Sua presença é interpretada antes do seu argumento.</h2>
+                <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Como a leitura acontece</span>
+                <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#f4ead8] md:text-5xl">Como postura, voz, ritmo e silêncio moldam sua presença masculina</h2>
               </div>
-              <p className="max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">Ritmo, postura, voz, silêncio e limites formam uma leitura rápida. O protocolo trabalha essa sequência: reconhecer o sinal emitido, entender a leitura que ele provoca e treinar um ajuste observável.</p>
+              <p className="max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">Presença masculina não é discurso pronto. É leitura rápida. O outro percebe ritmo, postura, voz, silêncio, limite e coerência antes mesmo de avaliar seus argumentos.</p>
             </div>
 
             <div className="mt-14 grid gap-5 md:grid-cols-3">
@@ -443,13 +466,13 @@ export default function App() {
             <div className="mt-14">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A]">Como o problema aparece</p>
               <div className="mt-6 grid gap-5 md:grid-cols-3">
-              {symptoms.map((item) => (
-                <article key={item.title} className="border border-white/10 bg-[#11100d] p-7">
-                  <div className="mb-6 text-[#CFA34A]">{item.icon}</div>
-                  <h3 className="text-xl font-black uppercase leading-tight text-[#f4ead8]">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-[#a9a194]">{item.text}</p>
-                </article>
-              ))}
+                {symptoms.map((item) => (
+                  <article key={item.title} className="border border-white/10 bg-[#11100d] p-7">
+                    <div className="mb-6 text-[#CFA34A]">{item.icon}</div>
+                    <h3 className="text-xl font-black uppercase leading-tight text-[#f4ead8]">{item.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-[#a9a194]">{item.text}</p>
+                  </article>
+                ))}
               </div>
             </div>
 
@@ -479,8 +502,8 @@ export default function App() {
             <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div>
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Conteúdo e entregáveis</span>
-                <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Dois materiais. Um roteiro claro de 15 dias.</h2>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#bdb4a5]">Você recebe o protocolo principal e o material complementar em PDF. A proposta é observar seus sinais, treinar ajustes simples e aplicar cada aprendizado em situações reais.</p>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">O que você aprende para melhorar presença, comunicação e confiança masculina</h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#bdb4a5]">Você recebe o protocolo principal e o material complementar em PDF. A proposta é observar seus sinais, ajustar sua postura e aplicar cada aprendizado em situações reais.</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {[PRODUCT.format, '10–20 minutos por dia', 'Acesso por e-mail', `${PRODUCT.guaranteeDays} dias de garantia`].map((item) => (
                     <span key={item} className="border border-[#CFA34A]/25 bg-[#11100d] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#d8d0c1]">{item}</span>
@@ -499,7 +522,7 @@ export default function App() {
             <div className="mt-20 max-w-4xl">
               <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Sumário do protocolo</span>
               <h3 className="mt-4 text-3xl font-black uppercase leading-tight text-[#f4ead8] md:text-5xl">O que você trabalha em cada fase</h3>
-              <p className="mt-5 text-base leading-relaxed text-[#aaa194] md:text-lg">A estrutura abaixo reúne os temas confirmados para o roteiro de 15 dias.</p>
+              <p className="mt-5 text-base leading-relaxed text-[#aaa194] md:text-lg">A estrutura abaixo reúne os temas confirmados para desenvolver presença masculina, postura, comunicação e confiança em 15 dias.</p>
             </div>
 
             <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -519,6 +542,24 @@ export default function App() {
           </div>
         </section>
 
+        <section id="busca" className="border-y border-white/5 bg-[#0f0e0b] py-24">
+          <div className="mx-auto max-w-6xl px-5 md:px-8">
+            <div className="max-w-4xl">
+              <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Presença masculina no digital e no presencial</span>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Respostas objetivas para as dúvidas mais comuns sobre confiança, postura e presença masculina</h2>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">Este material foi estruturado para quem quer melhorar presença masculina, parecer menos inseguro e se comunicar com mais firmeza no online e no presencial.</p>
+            </div>
+            <div className="mt-12 grid gap-5 md:grid-cols-2">
+              {searchIntentTopics.map((item) => (
+                <article key={item.title} className="border border-white/10 bg-[#11100d] p-7">
+                  <h3 className="text-2xl font-black uppercase leading-tight text-[#f4ead8]">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-[#aaa194]">{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="autora" className="border-y border-white/5 bg-[#0f0e0b] py-24">
           <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-8">
             <div className="border border-[#CFA34A]/30 bg-[#090806] p-7 md:p-9" aria-label="Identidade editorial de Sol Lima">
@@ -532,11 +573,11 @@ export default function App() {
 
             <div>
               <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Quem responde pelo conteúdo</span>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Autoria identificada. Escopo sem exageros.</h2>
+              <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Autoria identificada. Escopo claro. Proposta verificável.</h2>
               <div className="mt-7 space-y-5 text-base leading-relaxed text-[#bdb4a5] md:text-lg">
                 <p className="text-xl font-bold text-[#f4ead8]">Sol Lima é a criadora e responsável editorial do {PRODUCT.name}.</p>
-                <p>Ela organiza a proposta, o escopo dos materiais e a comunicação do produto. Sua atuação pública reúne protocolos, livros e conteúdos digitais sobre relacionamentos.</p>
-                <p>O material é educacional e trabalha auto-observação, comunicação e presença. Não é terapia, não oferece diagnóstico e não promete controlar a decisão de outras pessoas.</p>
+                <p>Ela organiza a proposta, o escopo dos materiais e a comunicação do produto. Sua atuação pública reúne protocolos, livros e conteúdos digitais sobre relacionamentos e autoconhecimento.</p>
+                <p>O material é educacional e trabalha presença, postura, comunicação e auto-observação. Não é terapia, não oferece diagnóstico e não promete controlar a decisão de outras pessoas.</p>
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 <div className="border border-white/10 bg-[#090806] p-5">
@@ -545,7 +586,7 @@ export default function App() {
                 </div>
                 <div className="border border-white/10 bg-[#090806] p-5">
                   <p className="text-xs font-black uppercase tracking-[0.14em] text-[#CFA34A]">Atuação pública</p>
-                  <p className="mt-3 text-sm font-bold leading-relaxed text-[#d8d0c1]">Conteúdos e produtos digitais sobre relacionamentos e autoconhecimento.</p>
+                  <p className="mt-3 text-sm font-bold leading-relaxed text-[#d8d0c1]">Conteúdos e produtos digitais sobre relacionamentos, comunicação e autoconhecimento.</p>
                 </div>
               </div>
               <a
@@ -566,14 +607,14 @@ export default function App() {
             <div className="max-w-4xl">
               <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Credibilidade verificável</span>
               <h2 className="mt-4 text-4xl font-black uppercase leading-[0.98] tracking-tight text-[#f4ead8] md:text-6xl">Confira o que pode ser checado antes da compra.</h2>
-              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">A página prioriza evidências documentais. Depoimentos só serão publicados quando houver origem e autorização de uso registradas.</p>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#bdb4a5]">A página prioriza evidências documentais. Depoimentos só serão publicados quando houver origem, vínculo com a compra e autorização de uso registradas.</p>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               <article className="border border-white/10 bg-[#11100d] p-7">
                 <CheckCircle2 size={24} className="text-[#CFA34A]" />
                 <p className="mt-6 text-xs font-black uppercase tracking-[0.16em] text-[#CFA34A]">Escopo publicado</p>
                 <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-[#f4ead8]">Você sabe o que recebe</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#aaa194]">Dois materiais em PDF, sumário em três fases, rotina de 15 dias, formato de acesso e preço estão descritos na oferta.</p>
+                <p className="mt-4 text-sm leading-relaxed text-[#aaa194]">Dois materiais em PDF, sumário em três fases, foco em presença masculina, rotina de 15 dias, formato de acesso e preço estão descritos na oferta.</p>
                 <button type="button" onClick={() => handleTrackedSectionNavigation('conteudo-protocolo', 'credibility_content')} className="mt-6 min-h-11 text-left text-sm font-black uppercase tracking-[0.1em] text-[#CFA34A]">Revisar conteúdo</button>
               </article>
               <article className="border border-white/10 bg-[#11100d] p-7">
@@ -653,12 +694,20 @@ export default function App() {
 
         <section className="bg-[#090806] pb-24">
           <div className="mx-auto max-w-3xl px-5 md:px-8">
-            <div className="mb-12 text-center"><span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Dúvidas frequentes</span><h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-[#f4ead8] md:text-4xl">Antes de entrar</h2></div>
+            <div className="mb-12 text-center">
+              <span className="text-xs font-black uppercase tracking-[0.18em] text-[#CFA34A] md:text-[10px] md:tracking-[0.24em]">Dúvidas frequentes</span>
+              <h2 className="mt-4 text-3xl font-black uppercase tracking-tight text-[#f4ead8] md:text-4xl">Perguntas sobre presença masculina, confiança e postura</h2>
+            </div>
             <div className="space-y-3">
               {faqs.map(([q, a], idx) => (
                 <div key={q} className={`overflow-hidden border bg-[#11100d] ${openFaq === idx ? 'border-[#CFA34A]/45' : 'border-white/10'}`}>
-                  <button type="button" aria-expanded={openFaq === idx} aria-controls={`faq-answer-${idx}`} className="flex w-full items-center justify-between gap-4 p-5 text-left" onClick={() => handleFaqToggle(idx, q)}><span className="text-sm font-black text-[#f4ead8] md:text-base">{q}</span><ChevronDown size={18} className={`shrink-0 text-[#CFA34A] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} /></button>
-                  <div id={`faq-answer-${idx}`} role="region" aria-hidden={openFaq !== idx} className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-56 px-5 pb-5' : 'max-h-0 px-5'}`}><p className="text-sm leading-relaxed text-[#aaa194]">{a}</p></div>
+                  <button type="button" aria-expanded={openFaq === idx} aria-controls={`faq-answer-${idx}`} className="flex w-full items-center justify-between gap-4 p-5 text-left" onClick={() => handleFaqToggle(idx, q)}>
+                    <span className="text-sm font-black text-[#f4ead8] md:text-base">{q}</span>
+                    <ChevronDown size={18} className={`shrink-0 text-[#CFA34A] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div id={`faq-answer-${idx}`} role="region" aria-hidden={openFaq !== idx} className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-56 px-5 pb-5' : 'max-h-0 px-5'}`}>
+                    <p className="text-sm leading-relaxed text-[#aaa194]">{a}</p>
+                  </div>
                 </div>
               ))}
             </div>
