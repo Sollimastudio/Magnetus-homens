@@ -7,11 +7,11 @@ export const EXPERIMENT_STATUS = Object.freeze({ active, queued, blocked });
 export const EXPERIMENTS = Object.freeze({
   headline_presence_loss: Object.freeze({
     id: 'headline_presence_loss',
-    version: 1,
+    version: 2,
     status: active,
     order: 1,
     surface: 'hero_headline',
-    hypothesis: 'Nomear a perda de presença quando existe interesse aumenta a identificação sem ampliar a promessa do produto.',
+    hypothesis: 'Manter presença masculina explícita no hero melhora SEO semântico e ainda permite testar identificação emocional.',
     primaryMetric: 'approved_purchase',
     diagnosticMetric: 'checkout_click_through_rate',
     previewable: true,
@@ -19,15 +19,15 @@ export const EXPERIMENTS = Object.freeze({
       control: Object.freeze({
         weight: 0.5,
         values: Object.freeze({
-          headlineLead: 'Ajuste os sinais de insegurança.',
-          headlineAccent: 'Construa presença.',
+          headlineLead: 'Desenvolva presença masculina.',
+          headlineAccent: 'Construa confiança e postura.',
         }),
       }),
       presence_loss: Object.freeze({
         weight: 0.5,
         values: Object.freeze({
-          headlineLead: 'Pare de perder a presença quando gosta.',
-          headlineAccent: 'Mantenha seu eixo.',
+          headlineLead: 'Pare de transmitir insegurança.',
+          headlineAccent: 'Fortaleça sua presença masculina.',
         }),
       }),
     }),
