@@ -1,9 +1,9 @@
 export const PRODUCT = Object.freeze({
   id: 'magnetus_iii',
   name: 'Magnetus III',
-  subtitle: 'Protocolo de Presença Masculina em 15 Dias',
-  canonicalName: 'Magnetus III — Protocolo de Presença Masculina em 15 Dias',
-  promise: 'Ajuste os sinais de pressa e insegurança para construir uma presença mais firme em 15 dias.',
+  subtitle: 'Presença Masculina, Confiança e Postura em 15 Dias',
+  canonicalName: 'Magnetus III — Presença Masculina, Confiança e Postura em 15 Dias',
+  promise: 'Desenvolva presença masculina, confiança, postura e comunicação em 15 dias, sem parecer ansioso, carente ou inseguro.',
   format: '2 materiais digitais em PDF',
   bonusName: 'Antídoto do Antivalor',
   guaranteeDays: 7,
