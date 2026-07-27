@@ -1,0 +1,49 @@
+{
+  "project": "Magnetus III Masculino",
+  "stage": "1.3",
+  "status": "ready_for_export",
+  "brand_voice": {
+    "central_mechanism": "Vazamento de Presença™",
+    "mother_phrase": "Quanto mais você tenta provar seu valor, menos espaço deixa para sua presença falar.",
+    "prohibited_claims": [
+      "prometer conquista garantida",
+      "usar linguagem redpill ou macho alfa",
+      "ensinar manipulação",
+      "usar depoimentos inventados",
+      "humilhar o cliente para vender"
+    ]
+  },
+  "creatives": [
+    {
+      "id": "M1_POSTURA_MUDA",
+      "funnel_stage": "cold_identification",
+      "primary_format": "vertical_video_15_25s",
+      "support_formats": ["feed_1080x1350", "story_1080x1920", "reels_cover_1080x1920"],
+      "hook": "Quando você gosta, sua postura muda?",
+      "headline": "Recupere sua presença quando alguém importa",
+      "cta": "Saiba mais",
+      "utm": "?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_frio&utm_content=M1_POSTURA_MUDA"
+    },
+    {
+      "id": "M2_PROVAR_VALOR",
+      "funnel_stage": "cold_mechanism",
+      "primary_format": "carousel_6_cards_1080x1350",
+      "support_formats": ["feed_1080x1350"],
+      "hook": "Quanto mais você tenta provar valor, menos sua presença fala.",
+      "headline": "Faça sua presença falar antes da explicação",
+      "cta": "Saiba mais",
+      "utm": "?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_frio&utm_content=M2_PROVAR_VALOR"
+    },
+    {
+      "id": "M3_SEM_URGENCIA",
+      "funnel_stage": "warm_objection",
+      "primary_format": "talking_head_video_20_30s",
+      "support_formats": ["feed_1080x1350", "story_1080x1920", "reels_cover_1080x1920"],
+      "hook": "Não é ser frio. É parar de transmitir urgência.",
+      "headline": "Demonstre interesse sem transmitir urgência",
+      "cta": "Conheça o protocolo",
+      "utm": "?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_morno&utm_content=M3_SEM_URGENCIA"
+    }
+  ],
+  "export_url": "/ads/etapa-1-3/"
+}
