@@ -7,11 +7,11 @@ export const EXPERIMENT_STATUS = Object.freeze({ active, queued, blocked });
 export const EXPERIMENTS = Object.freeze({
   headline_presence_loss: Object.freeze({
     id: 'headline_presence_loss',
-    version: 2,
+    version: 3,
     status: active,
     order: 1,
     surface: 'hero_headline',
-    hypothesis: 'Manter presença masculina explícita no hero melhora SEO semântico e ainda permite testar identificação emocional.',
+    hypothesis: 'Uma headline que identifica a perda de firmeza quando o homem gosta aumenta reconhecimento sem recorrer a linguagem de manipulação.',
     primaryMetric: 'approved_purchase',
     diagnosticMetric: 'checkout_click_through_rate',
     previewable: true,
@@ -19,15 +19,15 @@ export const EXPERIMENTS = Object.freeze({
       control: Object.freeze({
         weight: 0.5,
         values: Object.freeze({
-          headlineLead: 'Desenvolva presença masculina.',
-          headlineAccent: 'Construa confiança e postura.',
+          headlineLead: 'Quando você gosta, sua postura muda?',
+          headlineAccent: 'Recupere sua presença masculina.',
         }),
       }),
       presence_loss: Object.freeze({
         weight: 0.5,
         values: Object.freeze({
-          headlineLead: 'Pare de transmitir insegurança.',
-          headlineAccent: 'Fortaleça sua presença masculina.',
+          headlineLead: 'Pare de tentar provar seu valor.',
+          headlineAccent: 'Faça sua presença falar primeiro.',
         }),
       }),
     }),
@@ -54,9 +54,9 @@ export const EXPERIMENTS = Object.freeze({
       result: Object.freeze({
         weight: 0.5,
         values: Object.freeze({
-          checkoutCtaLabel: 'Construir minha presença',
-          heroSectionCtaLabel: 'Construir minha presença',
-          stickyCtaLabel: 'Construir minha presença',
+          checkoutCtaLabel: 'Quero recuperar minha presença',
+          heroSectionCtaLabel: 'Quero recuperar minha presença',
+          stickyCtaLabel: 'Recuperar minha presença',
         }),
       }),
     }),
