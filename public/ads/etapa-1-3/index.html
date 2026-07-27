@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Magnetus III — Estúdio de Criativos Masculinos</title>
+  <style>
+    :root{--bg:#090806;--bg2:#21180d;--gold:#cfa34a;--cream:#f3eadc;--muted:#b9ad9b}
+    *{box-sizing:border-box}body{margin:0;background:#070604;color:var(--cream);font-family:Inter,Arial,sans-serif}
+    header{padding:40px 24px;border-bottom:1px solid #ffffff15;background:linear-gradient(135deg,#1b140b,#070604)}
+    header div,main{max-width:1280px;margin:auto}h1{font-size:clamp(34px,6vw,68px);margin:8px 0 14px;line-height:.92;text-transform:uppercase;font-weight:950}
+    .kicker{letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:900;font-size:12px}.lead{max-width:840px;color:#cbc1b3;line-height:1.65}
+    main{padding:34px 20px 80px}.creative{margin:0 0 54px;padding:28px;background:#100e0b;border:1px solid #ffffff14;border-radius:10px}
+    .creative h2{font-size:34px;margin:7px 0;text-transform:uppercase;line-height:1}.meta{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 24px}.tag{padding:8px 11px;border:1px solid #cfa34a55;color:var(--gold);font-size:12px;border-radius:999px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}.asset{background:#080705;padding:14px;border-radius:8px;border:1px solid #ffffff10}.asset canvas{width:100%;height:auto;border-radius:4px;display:block;background:#17120a}.asset h3{font-size:14px;margin:12px 0 8px;text-transform:uppercase}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{border:0;background:var(--gold);color:#090806;padding:11px 14px;font-weight:950;border-radius:4px;cursor:pointer}.actions button.secondary{background:transparent;color:var(--gold);border:1px solid #cfa34a66}.copy{margin-top:24px;padding:18px;background:#090806;border-left:3px solid var(--gold);color:#cbc1b3;line-height:1.65}.copy strong{color:var(--cream)}
+    footer{padding:30px;text-align:center;color:#82786a;border-top:1px solid #ffffff10}.note{font-size:12px;color:#968a7a;margin-top:10px}
+  </style>
+</head>
+<body>
+<header><div><p class="kicker">Magnetus III · Etapa 1.3</p><h1>Estúdio de Criativos Masculinos</h1><p class="lead">Pacote canônico dos criativos M1, M2 e M3. Exporte as peças em PNG para feed, carrossel, Stories e capa de Reels. Cada peça preserva a mesma promessa e o mesmo código UTM reconhecido pela página masculina.</p></div></header>
+<main id="app"></main>
+<footer>Magnetus III · Sollima Studio · Produção editorial canônica</footer>
+<script>
+const brand='MAGNETUS III';
+const palette={bg:'#090806',bg2:'#2b2011',gold:'#cfa34a',cream:'#f3eadc',muted:'#c3b8a8'};
+const creatives=[
+ {id:'M1_POSTURA_MUDA',title:'M1 — A postura muda quando gosta',stage:'Público frio · identificação',utm:'?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_frio&utm_content=M1_POSTURA_MUDA',copy:'Talvez você não tenha falta de valor. Talvez, quando alguém importa, sua comunicação comece a transmitir pressa, disponibilidade e necessidade de aprovação. O Magnetus III ajuda a reconhecer esses sinais e construir presença masculina no digital e no presencial, sem manipulação e sem personagem.',script:'Você pode ser firme no trabalho e ainda perder o eixo quando alguém importa. Responde rápido, explica demais e tenta impedir que o interesse desapareça. O problema não é gostar. É deixar a ansiedade falar antes da sua presença. O Magnetus III organiza 15 dias para ajustar postura, ritmo e comunicação.',assets:[
+   {name:'Feed 4:5',w:1080,h:1350,image:'/images/optimized/hero-desktop.webp',eyebrow:'PARA HOMENS FUNCIONAIS',headline:'Quando você gosta, sua postura muda?',body:'Recupere sua presença quando alguém importa.',cta:'SAIBA MAIS'},
+   {name:'Stories / Capa de Reels 9:16',w:1080,h:1920,image:'/images/optimized/hero-mobile.webp',eyebrow:'NÃO É FALTA DE VALOR',headline:'A ansiedade pode falar antes da sua presença.',body:'15 dias para ajustar ritmo, postura e comunicação.',cta:'CONHEÇA O MAGNETUS III'}]},
+ {id:'M2_PROVAR_VALOR',title:'M2 — Tentativa de provar valor',stage:'Público frio · mecanismo',utm:'?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_frio&utm_content=M2_PROVAR_VALOR',copy:'Presença não é discurso pronto. É leitura rápida. Ritmo, pausa, limite, voz e coerência chegam antes dos argumentos. O Magnetus III trabalha os sinais que enfraquecem seu valor percebido e mostra como aplicar ajustes em conversas, encontros, redes sociais e situações reais.',assets:[
+   {name:'Carrossel 1/6',w:1080,h:1350,eyebrow:'VAZAMENTO DE PRESENÇA',headline:'Quanto mais você tenta provar valor, menos sua presença fala.',body:'Deslize para reconhecer os sinais.',cta:'1 DE 6'},
+   {name:'Carrossel 2/6',w:1080,h:1350,eyebrow:'SINAL 1',headline:'Você explica demais.',body:'Tenta impedir qualquer possibilidade de ser mal interpretado.',cta:'2 DE 6'},
+   {name:'Carrossel 3/6',w:1080,h:1350,eyebrow:'SINAL 2',headline:'Fica disponível sem critério.',body:'Como se qualquer pausa pudesse custar a oportunidade.',cta:'3 DE 6'},
+   {name:'Carrossel 4/6',w:1080,h:1350,eyebrow:'SINAL 3',headline:'Tenta impressionar antes de construir respeito.',body:'O excesso começa a ocupar o lugar da presença.',cta:'4 DE 6'},
+   {name:'Carrossel 5/6',w:1080,h:1350,eyebrow:'A LEITURA RECEBIDA',headline:'A intenção pode ser boa. O que chega é ansiedade.',body:'Ritmo, pausa, limite e coerência são percebidos antes da explicação.',cta:'5 DE 6'},
+   {name:'Carrossel 6/6',w:1080,h:1350,image:'/images/optimized/hero-desktop.webp',eyebrow:'MAGNETUS III',headline:'Pare de convencer. Desenvolva presença.',body:'Um protocolo prático de 15 dias. Sem manipulação. Sem personagem.',cta:'SAIBA MAIS'}]},
+ {id:'M3_SEM_URGENCIA',title:'M3 — Interesse sem urgência',stage:'Público morno · quebra de objeção',utm:'?utm_source=meta&utm_medium=paid_social&utm_campaign=magnetus_masculino_morno&utm_content=M3_SEM_URGENCIA',copy:'O Magnetus III não ensina joguinhos. Ele foi estruturado para homens que querem demonstrar interesse com clareza, mas não querem mais transformar ansiedade em mensagens, insistência e disponibilidade sem limite.',script:'Você não precisa ignorar, sumir ou fingir desinteresse para parecer confiante. Isso também é personagem. Presença é demonstrar interesse sem abandonar seu ritmo, explicar sem implorar aprovação e aceitar a resposta sem perder o eixo. É isso que o Magnetus III treina.',assets:[
+   {name:'Feed 4:5',w:1080,h:1350,image:'/images/optimized/hero-desktop.webp',eyebrow:'PRESENÇA NÃO É FRIEZA',headline:'Não é ser frio. É parar de transmitir urgência.',body:'Demonstre interesse sem abandonar seu ritmo.',cta:'CONHEÇA O PROTOCOLO'},
+   {name:'Stories / Capa de Reels 9:16',w:1080,h:1920,image:'/images/optimized/hero-mobile.webp',eyebrow:'SEM JOGUINHOS',headline:'Interesse com clareza. Presença sem urgência.',body:'O Magnetus III trabalha eixo, não manipulação.',cta:'15 DIAS PARA AJUSTAR SUA PRESENÇA'}]}
+];
+function wrap(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=text.split(' ');let line='',lines=[];for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[maxLines-1]=lines[maxLines-1].replace(/[.,;:!?]?$/,'…')}lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));return y+lines.length*lineHeight}
+function rounded(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+async function draw(canvas,spec){canvas.width=spec.w;canvas.height=spec.h;const ctx=canvas.getContext('2d');const w=spec.w,h=spec.h;const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,palette.bg2);grad.addColorStop(1,palette.bg);ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ if(spec.image){try{const img=await loadImage(spec.image);const scale=Math.max(w/img.width,h/img.height);const iw=img.width*scale,ih=img.height*scale;ctx.globalAlpha=.68;ctx.drawImage(img,(w-iw)/2,(h-ih)/2,iw,ih);ctx.globalAlpha=1;const ov=ctx.createLinearGradient(0,0,w,0);ov.addColorStop(0,'rgba(9,8,6,.99)');ov.addColorStop(.65,'rgba(9,8,6,.80)');ov.addColorStop(1,'rgba(9,8,6,.28)');ctx.fillStyle=ov;ctx.fillRect(0,0,w,h)}catch(e){}}
+ ctx.strokeStyle='rgba(207,163,74,.22)';ctx.lineWidth=2;for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(w*(.66+i*.055),0);ctx.lineTo(w*(.34+i*.055),h);ctx.stroke()}
+ const pad=w*.075;ctx.fillStyle=palette.gold;ctx.font=`900 ${Math.round(w*.026)}px Arial`;ctx.fillText(brand,pad,h*.075);ctx.fillStyle=palette.gold;ctx.font=`900 ${Math.round(w*.022)}px Arial`;wrap(ctx,spec.eyebrow,pad,h*.19,w*.75,w*.035,2);
+ ctx.fillStyle=palette.cream;ctx.font=`950 ${Math.round(w*(h>w?0.069:0.063))}px Arial`;const hy=wrap(ctx,spec.headline.toUpperCase(),pad,h*.29,w*.82,w*.078,6);
+ ctx.fillStyle=palette.muted;ctx.font=`600 ${Math.round(w*.032)}px Arial`;const by=wrap(ctx,spec.body,pad,hy+w*.045,w*.76,w*.050,5);
+ ctx.fillStyle=palette.gold;rounded(ctx,pad,Math.min(by+w*.07,h*.79),w*.56,w*.09,w*.005);ctx.fillStyle='#090806';ctx.font=`950 ${Math.round(w*.023)}px Arial`;ctx.fillText(spec.cta,pad+w*.032,Math.min(by+w*.07,h*.79)+w*.057);
+ ctx.strokeStyle='rgba(243,234,220,.20)';ctx.beginPath();ctx.moveTo(pad,h*.91);ctx.lineTo(w-pad,h*.91);ctx.stroke();ctx.fillStyle=palette.cream;ctx.font=`700 ${Math.round(w*.018)}px Arial`;ctx.fillText('PRESENÇA · POSTURA · COMUNICAÇÃO',pad,h*.945);ctx.textAlign='right';ctx.fillStyle=palette.gold;ctx.fillText('RELACIONE-SE®',w-pad,h*.945);ctx.textAlign='left';}
+function loadImage(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src})}
+function download(canvas,name){canvas.toBlob(blob=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)},'image/png')}
+function safe(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+const app=document.getElementById('app');creatives.forEach(c=>{const section=document.createElement('section');section.className='creative';section.innerHTML=`<p class="kicker">${c.id}</p><h2>${c.title}</h2><div class="meta"><span class="tag">${c.stage}</span><span class="tag">UTM preservada</span><span class="tag">PNG exportável</span></div><div class="grid"></div><div class="copy"><strong>Copy do anúncio</strong><br>${c.copy}${c.script?`<br><br><strong>Roteiro de Reels</strong><br>${c.script}`:''}<p class="note"><strong>URL:</strong> ${c.utm}</p></div>`;const grid=section.querySelector('.grid');c.assets.forEach((a,idx)=>{const box=document.createElement('article');box.className='asset';const cv=document.createElement('canvas');const h=document.createElement('h3');h.textContent=a.name;const acts=document.createElement('div');acts.className='actions';const b=document.createElement('button');b.textContent='Baixar PNG';b.onclick=()=>download(cv,`${c.id}-${String(idx+1).padStart(2,'0')}-${safe(a.name)}`);const cp=document.createElement('button');cp.className='secondary';cp.textContent='Copiar UTM';cp.onclick=()=>navigator.clipboard.writeText(c.utm);acts.append(b,cp);box.append(cv,h,acts);grid.append(box);draw(cv,a)});app.append(section)});
+</script>
+</body>
+</html>
