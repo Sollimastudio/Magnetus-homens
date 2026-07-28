@@ -270,10 +270,8 @@ export default function App() {
       destination: 'kiwify_checkout',
       checkoutExperimentTagged: Boolean(experimentTracking.s3),
     });
-    window.open(
+    window.location.assign(
       buildCheckoutUrl(PRODUCT.checkoutUrl, { ...tracking, ...experimentTracking }),
-      '_blank',
-      'noopener,noreferrer',
     );
   };
 
